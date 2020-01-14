@@ -1,10 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class EducationDetails extends Model
 {
-    //
+    protected $fillable = ['education_name' , 'department' , 'degree' ,
+     'present' , 'details' , 'start_date' , 'end_date' , 'user_id'];
+
+    protected $hidden = ['created_at' , 'updated_at'];
+
+    /** relations */
+    public function user()
+    {
+        return $this->belongsTo(User::class , 'user_id');
+    }
 }

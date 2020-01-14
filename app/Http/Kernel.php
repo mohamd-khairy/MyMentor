@@ -40,6 +40,10 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'CORSMiddleware',
+            'JsonifyMiddleware',
+            'ValidateJsonFormatMiddleware',
+            'SetLocaleMiddleware',
         ],
     ];
 
@@ -61,6 +65,11 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'CORSMiddleware' => \App\Http\Middleware\CORSMiddleware::class,
+        'JsonifyMiddleware' => \App\Http\Middleware\JsonifyMiddleware::class,
+        'ValidateJsonFormatMiddleware' => \App\Http\Middleware\ValidateJsonFormatMiddleware::class,
+        'SetLocaleMiddleware' => \App\Http\Middleware\SetLocaleMiddleware::class,
+        'CheckToken' => \App\Http\Middleware\CheckToken::class,
     ];
 
     /**

@@ -16,7 +16,6 @@ class CreateWeekDaysTable extends Migration
         Schema::create('week_days', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('day')->nullable();
-            $table->timestamps();
         });
     }
 

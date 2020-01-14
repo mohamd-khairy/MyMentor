@@ -16,3 +16,44 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group([
+
+    'middleware' => ['auth:api' , 'CheckToken'],
+    'prefix' => 'v1'
+
+], function () {
+
+    Route::post('auth/logout', 'AuthController@logout');
+    Route::post('auth/refresh', 'AuthController@refresh');
+    Route::post('auth/me', 'AuthController@me');
+
+    /** route */
+    Route::resource('category' , 'CategoryController');
+    Route::resource('education' , 'EducationController');
+    Route::resource('experience' , 'ExperienceController');
+    Route::resource('job' , 'JobDetailsController');
+    Route::resource('payment' , 'PaymentController');
+    Route::resource('profile' , 'ProfileController');
+    Route::resource('rate' , 'RateController');
+    Route::resource('session' , 'SessionController');
+    Route::resource('skill' , 'SkillController');
+    Route::resource('topics' , 'TopicsController');
+    Route::resource('user' , 'UserController');
+    
+
+});
+
+Route::group([
+    
+    'middleware' => 'api',
+    'namespace' => 'Api',
+    'prefix' => 'v1'
+
+], function () {
+
+    Route::post('auth/login', 'AuthController@login');
+    Route::post('auth/register', 'AuthController@register');
+
+});
