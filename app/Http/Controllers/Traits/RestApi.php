@@ -8,7 +8,7 @@ trait RestApi
     public function get()
     {
         $model = self::MODEL;
-        $data = $model->get();
+        $data = $model::get();
 
         if (empty($data)) {
             return responseFail();
@@ -19,7 +19,7 @@ trait RestApi
     public function find($id)
     {
         $model = self::MODEL;
-        $data = $model->find($id);
+        $data = $model::find($id);
 
         if (empty($data)) {
             return responseFail();
@@ -30,7 +30,7 @@ trait RestApi
     public function put($request, $id)
     {
         $model = self::MODEL;
-        $data = $model->find($id);
+        $data = $model::find($id);
 
         if (empty($data)) {
             return responseFail();
@@ -55,7 +55,7 @@ trait RestApi
     public function remove($id)
     {
         $model = self::MODEL;
-        $data = $model->find($id);
+        $data = $model::find($id);
 
         if (empty($data)) {
             return responseFail();

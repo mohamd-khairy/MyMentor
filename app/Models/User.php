@@ -29,6 +29,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['user_type'];
+
+    
+    /** hash password when create user */
     public function setPasswordAttribute($input)
     {
         $this->attributes['password'] = Hash::make($input);

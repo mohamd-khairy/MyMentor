@@ -33,7 +33,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (! $token = Auth::guard('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return responseUnAuthorize();
         }
 
         return $this->respondWithToken($token);
@@ -52,21 +52,21 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|min:6' 
-       ]);
-    
-       if ($validator->fails()) {    
-            return response()->json($validator->messages(), 200);
+        ]);
+        
+        if ($validator->fails()) {    
+            return response()->json($validator->messages(), 400);
         }
-
+        
         $data = $request->only('name','email', 'password');
 
         $user = User::create($data);
 
         if ($user) {
-            return response()->json($user , 200);
+            return responseSuccess($user);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return responseUnAuthorize();
     }
 
     /**
@@ -76,7 +76,8 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json($this->guard()->user());
+        return responseSuccess($this->guard()->user());
+
     }
 
     /**
@@ -88,7 +89,8 @@ class AuthController extends Controller
     {
         $this->guard()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return responseSuccess([] , 'Successfully logged out' );
+
     }
 
     /**

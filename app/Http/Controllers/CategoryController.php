@@ -12,6 +12,11 @@ class CategoryController extends Controller
 
     use RestApi;
 
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+    
     public function index()
     {
 
