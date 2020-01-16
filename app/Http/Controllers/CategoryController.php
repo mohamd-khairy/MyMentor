@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
-
+use App\Models\Category;
 
 class CategoryController extends Controller
 {

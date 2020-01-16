@@ -20,11 +20,13 @@ Route::group([
 
 ], function () {
 
-    Route::post('auth/logout', 'AuthController@logout');
-    Route::post('auth/refresh', 'AuthController@refresh');
-    Route::post('auth/me', 'AuthController@me');
+    Route::post('auth/logout', 'Api\AuthController@logout');
+    Route::post('auth/refresh', 'Api\AuthController@refresh');
+    Route::post('auth/me', 'Api\AuthController@me');
 
     /** route */
+    Route::resource('days' , 'WeekDayController');
+    Route::resource('language' , 'LanguageController');
     Route::resource('category' , 'CategoryController');
     Route::resource('education' , 'EducationController');
     Route::resource('experience' , 'ExperienceController');
@@ -36,7 +38,6 @@ Route::group([
     Route::resource('skill' , 'SkillController');
     Route::resource('topics' , 'TopicsController');
     Route::resource('user' , 'UserController');
-    
 
 });
 
@@ -48,7 +49,10 @@ Route::group([
 
 ], function () {
 
-    Route::post('auth/login', 'AuthController@login');
+    Route::post('auth/login', 'AuthController@login')->middleware('checkVerify');
     Route::post('auth/register', 'AuthController@register');
+    Route::get('auth/verify', 'AuthController@verify');
+    Route::post('auth/forget/password', 'AuthController@forgetPassword');
+    Route::post('auth/reset/password', 'AuthController@resetPassword');
 
 });

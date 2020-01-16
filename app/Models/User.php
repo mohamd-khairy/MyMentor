@@ -18,11 +18,11 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_type_id' , 'is_active'
+        'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token'
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'created_at' , 'updated_at'
+        'is_active', 'verified', 'password', 'remember_token', 'created_at' , 'updated_at'
     ];
 
     protected $casts = [
@@ -37,6 +37,12 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->attributes['password'] = Hash::make($input);
     }
+
+     /** email to lower case when create user */
+     public function setEmailAttribute($input)
+     {
+         $this->attributes['email'] = strtolower($input);
+     }
     
     /** relations */
 

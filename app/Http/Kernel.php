@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'ValidateJsonFormatMiddleware' => \App\Http\Middleware\ValidateJsonFormatMiddleware::class,
         'SetLocaleMiddleware' => \App\Http\Middleware\SetLocaleMiddleware::class,
         'CheckToken' => \App\Http\Middleware\CheckToken::class,
+        'checkVerify' => \App\Http\Middleware\checkVerify::class,
     ];
 
     /**

@@ -20,6 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->unsignedBigInteger('user_type_id')->default(2);
             $table->tinyInteger('is_active')->default(0);
+            $table->tinyInteger('verified')->default(0);
+            $table->string('resetPasswordCode')->nullable();
+            $table->timestamps('resetPasswordCodeCreationdate')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
