@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group([
 
-    'middleware' => ['api' , 'CheckToken'],
+    'middleware' => [ 'CheckToken' , 'api' ],
     'prefix' => 'v1'
 
 ], function () {

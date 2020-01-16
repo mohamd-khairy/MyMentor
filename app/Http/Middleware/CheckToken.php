@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\URL;
 
 class CheckToken
 {
@@ -17,20 +16,21 @@ class CheckToken
     public function handle($request, Closure $next)
     {
         $authorize = $request->header('Authorization');
-            $this->checkIn($authorize);
-        $split = explode(" " , $authorize);
-            $this->checkIn($split);
-        $token = end($split);
-            $this->checkIn($token);
-        
-        return $next($request);
-    }
-
-    public function checkIn($input)
-    {
-        if(empty($input)){
+        if(empty($authorize)){
             return responseUnAuthorize();
         }
+
+        $split = explode(" " , $authorize);
+        if(empty($split)){
+            return responseUnAuthorize();
+        }        
+        
+        $token = end($split);
+        if(empty($token)){
+            return responseUnAuthorize();
+        }      
+
+        return $next($request);
     }
 
 }
