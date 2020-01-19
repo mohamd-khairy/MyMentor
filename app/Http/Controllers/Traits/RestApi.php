@@ -11,7 +11,7 @@ trait RestApi
         $data = $model::get();
 
         if (empty($data)) {
-            return responseFail();
+            return responseFail("data is empty");
         }
         return responseSuccess($data);
     }
@@ -22,7 +22,7 @@ trait RestApi
         $data = $model::find($id);
 
         if (empty($data)) {
-            return responseFail();
+            return responseFail("data is empty");
         }
         return responseSuccess($data);
     }
@@ -33,7 +33,7 @@ trait RestApi
         $data = $model::find($id);
 
         if (empty($data)) {
-            return responseFail();
+            return responseFail("data is empty");
         }
 
         $data->update($request->all());
@@ -47,7 +47,7 @@ trait RestApi
         $data = $model::create($request->all());
 
         if (empty($data)) {
-            return responseFail();
+            return responseFail("data is empty");
         }
         return responseSuccess($data);
     }
@@ -58,7 +58,7 @@ trait RestApi
         $data = $model::find($id);
 
         if (empty($data)) {
-            return responseFail();
+            return responseFail("data is empty");
         }
 
         $data->delete();
@@ -66,4 +66,29 @@ trait RestApi
         return responseSuccess($data);
     }
 
+    
+    public function findBy($condition)
+    {
+        $model = self::MODEL;
+        $data = $model::where($condition)->first();
+
+        if (empty($data)) {
+            return responseFail("data is empty");
+        }
+        return responseSuccess($data);
+    }
+
+    public function putBy($request, $condition)
+    {
+        $model = self::MODEL;
+        $data = $model::where($condition)->first();
+
+        if (empty($data)) {
+            return responseFail("data is empty");
+        }
+
+        $data->update($request->all());
+
+        return responseSuccess($data);
+    }
 }

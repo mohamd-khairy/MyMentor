@@ -11,6 +11,14 @@ class Rate extends Model
 
     protected $hidden = ['created_at' , 'updated_at'];
 
+    protected $with = ['user'];
+    
+    /** attach loged in user id with profile data */
+    public function setUserIdAttribute($input)
+    {
+        $this->attributes['user_id'] = auth('api')->user()->id ?? '';
+    }
+    
     /** relations */
     
     public function user()

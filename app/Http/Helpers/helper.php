@@ -28,3 +28,12 @@ function responseUnAuthorize()
         "data" => []
     ] , 401);
 }
+
+function responseUnAuthenticated()
+{
+    return response()->json([
+        "status" => "fail",
+        "message" => "UnAuthenticated",
+        "data" => []
+    ] , 403);
+}

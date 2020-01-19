@@ -19,14 +19,20 @@ class Authenticate //extends Middleware
             if(strpos($request->url(),"api") > 0){
                 if(empty($request->header('Authorization'))){
                     return responseUnAuthorize();
+                }else{
+                    if(auth('api')->user()){
+                        return $next($request);
+                    }else{
+                        return responseUnAuthenticated();
+                    }
                 }
             }else{
                 return route('login');
             }
 
-            return $next($request);
         }
     }
+
 
     // protected function redirectTo($request)
     // {

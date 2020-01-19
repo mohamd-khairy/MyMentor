@@ -127,7 +127,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return responseSuccess($this->guard()->user());
+        return responseSuccess(auth('api')->user());
 
     }
 
@@ -141,7 +141,7 @@ class AuthController extends Controller
         /** update user data to be un active */
         auth('api')->user()->update(['is_active' => 0]);
 
-        $this->guard()->logout();
+        auth('api')->logout();
 
         return responseSuccess([] , 'Successfully logged out' );
 
@@ -248,7 +248,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken($this->guard()->refresh());
+        return $this->respondWithToken($this->guard('api')->refresh());
     }
 
     /**

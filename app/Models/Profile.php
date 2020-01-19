@@ -13,6 +13,21 @@ class Profile extends Model
 
     protected $hidden = ['created_at' , 'updated_at'];
 
+    protected $with = ['user'];
+    
+    /** attach loged in user id with profile data */
+    public function setUserIdAttribute($input)
+    {
+        $this->attributes['user_id'] = auth('api')->user()->id ?? '';
+    }
+
+    /** attach loged in user id with profile data */
+    public function setDateOfBirthAttribute($input)
+    {
+        $this->attributes['date_of_birth'] = date("Y-m-d",strtotime($input));
+    }
+
+
     /** relations */
     public function user()
     {

@@ -16,30 +16,15 @@ class ProfileController extends Controller
     {
         $this->middleware('auth:api');
     }
-    
-    public function index()
-    {
-
-        return $this->get();
-    }
-
-    public function store(Request $request)
-    {
-        return $this->add($request);        
-    }
 
     public function show($id)
     {
-        return $this->find($id);
+        return $this->findBy(['user_id' => $id]);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->put($request , $id);
+        return $this->putBy($request , ['user_id' => $id]);
     }
     
-    public function destroy($id)
-    {
-        return $this->remove($id);
-    }
 }

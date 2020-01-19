@@ -38,11 +38,12 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['password'] = Hash::make($input);
     }
 
-     /** email to lower case when create user */
-     public function setEmailAttribute($input)
-     {
-         $this->attributes['email'] = strtolower($input);
-     }
+    /** email to lower case when create user */
+    public function setEmailAttribute($input)
+    {
+        $this->attributes['email'] = strtolower($input);
+    }
+
     
     /** relations */
 
