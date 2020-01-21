@@ -39,6 +39,9 @@ Route::group([
     Route::resource('topics' , 'TopicsController');
     Route::resource('user' , 'UserController');
 
+
+    Route::get('user-educations' , 'EducationController@getByConditions');
+
 });
 
 Route::group([

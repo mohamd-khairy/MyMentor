@@ -35,8 +35,10 @@ trait RestApi
         if (empty($data)) {
             return responseFail("data is empty");
         }
+        $request = $request->all();
+        $request['user_id'] = auth('api')->user()->id;
 
-        $data->update($request->all());
+        $data->update($request);
 
         return responseSuccess($data);
     }
@@ -44,7 +46,9 @@ trait RestApi
     public function add($request)
     {
         $model = self::MODEL;
-        $data = $model::create($request->all());
+        
+        
+        $data = $model::firstOrCreate($data);
 
         if (empty($data)) {
             return responseFail("data is empty");
@@ -66,7 +70,17 @@ trait RestApi
         return responseSuccess($data);
     }
 
-    
+    public function getBy($condition)
+    {
+        $model = self::MODEL;
+        $data = $model::where($condition)->get();
+
+        if (empty($data)) {
+            return responseFail("data is empty");
+        }
+        return responseSuccess($data);
+    }
+
     public function findBy($condition)
     {
         $model = self::MODEL;
@@ -90,5 +104,17 @@ trait RestApi
         $data->update($request->all());
 
         return responseSuccess($data);
+    }
+
+    
+    public function getByConditions(Request $request)
+    {
+        $availableFilter = ['user_id' , 'id'];
+        foreach ($request->all() as $key => $value) {
+            if (in_array($key, $availableFilter)) {
+                $conditions[$key] = $value;
+            }
+        }
+        return $this->getBy($conditions);
     }
 }

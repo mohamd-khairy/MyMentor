@@ -22,7 +22,8 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'is_active', 'verified', 'password', 'remember_token', 'created_at' , 'updated_at'
+        'is_active', 'verified', 'password', 'remember_token', 'created_at' , 'updated_at' 
+        , 'email_verified_at' , 'resetPasswordCode' , 'resetPasswordCodeCreationdate'
     ];
 
     protected $casts = [

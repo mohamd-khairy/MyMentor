@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EducationDetails extends Model
 {
-    protected $fillable = ['education_name' , 'department' , 'degree' ,
+    protected $fillable = ['education_name' , 'department' , 'degree' , 'university' , 'faculty', 
      'present' , 'details' , 'start_date' , 'end_date' , 'user_id'];
 
     protected $hidden = ['created_at' , 'updated_at'];
@@ -17,7 +17,7 @@ class EducationDetails extends Model
     /** attach loged in user id with profile data */
     public function setUserIdAttribute($input)
     {
-        $this->attributes['user_id'] = auth('api')->user()->id ?? '';
+        $this->attributes['user_id'] = auth('api')->user()->id;
     }
     
     /** relations */

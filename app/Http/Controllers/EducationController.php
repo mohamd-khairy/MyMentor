@@ -16,10 +16,9 @@ class EducationController extends Controller
     {
         $this->middleware('auth:api');
     }
-    
+
     public function index()
     {
-
         return $this->get();
     }
 
@@ -42,4 +41,5 @@ class EducationController extends Controller
     {
         return $this->remove($id);
     }
+
 }

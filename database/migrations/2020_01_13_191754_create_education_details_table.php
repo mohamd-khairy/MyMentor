@@ -17,6 +17,8 @@ class CreateEducationDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('education_name')->nullable();
+            $table->string('university')->nullable();
+            $table->string('faculty')->nullable();
             $table->string('department')->nullable();
             $table->string('degree')->nullable();
             $table->tinyInteger('present')->default(0);
