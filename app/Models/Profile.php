@@ -16,9 +16,13 @@ class Profile extends Model
     protected $with = ['user'];
     
     /** attach loged in user id with profile data */
-    public function setUserIdAttribute($input)
+    public static function boot()
     {
-        $this->attributes['user_id'] = auth('api')->user()->id ?? '';
+        parent::boot();
+
+        static::creating(function ($data) {
+            $data->user_id = auth('api')->user()->id;
+        });
     }
 
     /** attach loged in user id with profile data */

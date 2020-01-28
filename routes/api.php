@@ -25,22 +25,21 @@ Route::group([
     Route::post('auth/me', 'Api\AuthController@me');
 
     /** route */
-    Route::resource('days' , 'WeekDayController');
-    Route::resource('language' , 'LanguageController');
-    Route::resource('category' , 'CategoryController');
-    Route::resource('education' , 'EducationController');
-    Route::resource('experience' , 'ExperienceController');
-    Route::resource('job' , 'JobDetailsController');
-    Route::resource('payment' , 'PaymentController');
-    Route::resource('profile' , 'ProfileController');
-    Route::resource('rate' , 'RateController');
+    Route::resource('days' , 'WeekDayController'); // done
+    Route::resource('language' , 'LanguageController'); // done
+    Route::resource('category' , 'CategoryController'); // done
+    Route::resource('education' , 'EducationController'); // done
+    Route::resource('experience' , 'ExperienceController'); // done
+    Route::resource('job' , 'JobDetailsController'); // done
+    Route::resource('payment' , 'PaymentController'); // done check table database
+    Route::resource('profile' , 'ProfileController'); // done
+    Route::resource('rate' , 'RateController'); // done
     Route::resource('session' , 'SessionController');
-    Route::resource('skill' , 'SkillController');
-    Route::resource('topics' , 'TopicsController');
-    Route::resource('user' , 'UserController');
+    Route::resource('skill' , 'SkillController'); // done
+    Route::resource('topic' , 'TopicsController'); // done
+    Route::resource('user' , 'UserController'); // done
 
-
-    Route::get('user-educations' , 'EducationController@getByConditions');
+    Route::get('search' , 'TopicsController@search'); // done
 
 });
 

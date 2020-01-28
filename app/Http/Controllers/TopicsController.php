@@ -16,30 +16,15 @@ class TopicsController extends Controller
     {
         $this->middleware('auth:api');
     }
-    
-    public function index()
-    {
 
-        return $this->get();
-    }
+    public function search(Request $request)
+    {
+        $searchText = $request->q;
 
-    public function store(Request $request)
-    {
-        return $this->add($request);        
-    }
+        $result = Topics::search($searchText)->paginate(20);
+        // return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
 
-    public function show($id)
-    {
-        return $this->find($id);
-    }
-
-    public function update(Request $request, $id)
-    {
-        return $this->put($request , $id);
-    }
-    
-    public function destroy($id)
-    {
-        return $this->remove($id);
+        // $result = Topics::search($searchText)->get();
+        return \responseSuccess($result);
     }
 }

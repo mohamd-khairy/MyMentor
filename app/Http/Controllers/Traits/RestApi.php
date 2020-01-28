@@ -5,10 +5,10 @@ use Illuminate\Http\Request;
 trait RestApi
 {
 
-    public function get()
+    public function get($conditions = null)
     {
         $model = self::MODEL;
-        $data = $model::get();
+        $data = $model::where($conditions)->get();
 
         if (empty($data)) {
             return responseFail("data is empty");
@@ -36,7 +36,7 @@ trait RestApi
             return responseFail("data is empty");
         }
         $request = $request->all();
-        $request['user_id'] = auth('api')->user()->id;
+        // $request['user_id'] = auth('api')->user()->id;
 
         $data->update($request);
 
@@ -46,9 +46,7 @@ trait RestApi
     public function add($request)
     {
         $model = self::MODEL;
-        
-        
-        $data = $model::firstOrCreate($data);
+        $data = $model::firstOrCreate($request->all());
 
         if (empty($data)) {
             return responseFail("data is empty");
@@ -105,16 +103,17 @@ trait RestApi
 
         return responseSuccess($data);
     }
-
     
-    public function getByConditions(Request $request)
+    public function filter($request)
     {
-        $availableFilter = ['user_id' , 'id'];
+        $availableFilter = ['user_id' , 'category_id' , 'language_id' , 'id'];
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $availableFilter)) {
                 $conditions[$key] = $value;
+            }else{
+                return responseFail("this filter not allowed");
             }
         }
-        return $this->getBy($conditions);
+        return $conditions ?? [];
     }
 }

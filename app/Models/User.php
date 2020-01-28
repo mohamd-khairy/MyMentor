@@ -34,9 +34,13 @@ class User extends Authenticatable implements JWTSubject
 
     
     /** hash password when create user */
-    public function setPasswordAttribute($input)
+    public static function boot()
     {
-        $this->attributes['password'] = Hash::make($input);
+        parent::boot();
+
+        static::creating(function ($data) {
+            $data->user_id = auth('api')->user()->id;
+        });
     }
 
     /** email to lower case when create user */

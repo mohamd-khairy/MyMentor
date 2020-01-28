@@ -16,16 +16,5 @@ class WeekDayController extends Controller
     {
         $this->middleware('auth:api');
     }
-    
-    public function index()
-    {
-
-        return $this->get();
-    }
-
-    public function show($id)
-    {
-        return $this->find($id);
-    }
 
 }
