@@ -25,7 +25,6 @@ class Profile extends Model
         });
     }
 
-    /** attach loged in user id with profile data */
     public function setDateOfBirthAttribute($input)
     {
         $this->attributes['date_of_birth'] = date("Y-m-d",strtotime($input));

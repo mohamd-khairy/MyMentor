@@ -34,7 +34,7 @@ Route::group([
     Route::resource('payment' , 'PaymentController'); // done check table database
     Route::resource('profile' , 'ProfileController'); // done
     Route::resource('rate' , 'RateController'); // done
-    Route::resource('session' , 'SessionController');
+    Route::resource('session' , 'SessionController'); // done
     Route::resource('skill' , 'SkillController'); // done
     Route::resource('topic' , 'TopicsController'); // done
     Route::resource('user' , 'UserController'); // done

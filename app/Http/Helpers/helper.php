@@ -1,39 +1,14 @@
 <?php
 
+use App\Models\User;
+use App\Models\WeekDays;
 
-
-function responseSuccess($data = [] , $msg = null)
+function getUser($condition)
 {
-    return response()->json( [
-        "status" => "success",
-        "message" => $msg,
-        "data" => $data
-    ] , 200);
+    return User::where($condition)->first();
 }
 
-function responseFail($msg = null)
+function getDay($condition)
 {
-    return response()->json( [
-        "status" => "fail",
-        "message" => $msg,
-        "data" => []
-    ] , 400);
-}
-
-function responseUnAuthorize()
-{
-    return response()->json([
-        "status" => "fail",
-        "message" => "UnAuthorize",
-        "data" => []
-    ] , 401);
-}
-
-function responseUnAuthenticated()
-{
-    return response()->json([
-        "status" => "fail",
-        "message" => "UnAuthenticated",
-        "data" => []
-    ] , 403);
+    return WeekDays::where($condition)->first();
 }

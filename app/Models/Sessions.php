@@ -11,6 +11,9 @@ class Sessions extends Model
 
     protected $hidden = ['created_at' , 'updated_at'];
 
+    protected $with = ['user_give' , 'user_recieve'];
+
+        
     /** relations */
 
     public function day()

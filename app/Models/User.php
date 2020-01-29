@@ -32,17 +32,11 @@ class User extends Authenticatable implements JWTSubject
 
     protected $with = ['user_type'];
 
-    
-    /** hash password when create user */
-    public static function boot()
+    public function setPasswordAttribute($input)
     {
-        parent::boot();
-
-        static::creating(function ($data) {
-            $data->user_id = auth('api')->user()->id;
-        });
+        $this->attributes['password'] = Hash::make($input);
     }
-
+    
     /** email to lower case when create user */
     public function setEmailAttribute($input)
     {

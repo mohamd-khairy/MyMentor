@@ -106,7 +106,7 @@ trait RestApi
     
     public function filter($request)
     {
-        $availableFilter = ['user_id' , 'category_id' , 'language_id' , 'id'];
+        $availableFilter = ['user_give_id','user_recieve_id','user_id' , 'category_id' , 'language_id' , 'id'];
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $availableFilter)) {
                 $conditions[$key] = $value;
