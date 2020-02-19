@@ -20,7 +20,7 @@ class CreateTopicsTable extends Migration
             $table->unsignedBigInteger('language_id')->index('language_id')->nullable();
             $table->string('topic')->index()->nullable();
             $table->string('subject')->index()->nullable();
-            $table->text('details')->index()->nullable();
+            $table->text('details')->nullable();
 
             $table->foreign('category_id')->references('id')
             ->on('categories')->onUpdate('cascade')->onDelete('cascade');
