@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('is_active')->default(0);
             $table->tinyInteger('verified')->default(0);
             $table->string('resetPasswordCode')->nullable();
-            $table->timestamps('resetPasswordCodeCreationdate')->nullable();
+            $table->timestamp('resetPasswordCodeCreationdate')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
