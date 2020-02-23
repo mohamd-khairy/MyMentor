@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CitiesSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(WeekDays::class);
+        $this->call(LanguagesSeeder::class);
+        $this->call(CategoriesSeeder::class);
     }
 }

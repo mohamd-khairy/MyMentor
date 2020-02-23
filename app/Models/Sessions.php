@@ -7,13 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sessions extends Model
 {
-    protected $fillable = [ 'details' , 'duration' , 'day_id' , 'user_give_id' , 'user_recieve_id'];
+    protected $fillable = [ 'details' , 'duration' , 'day_id' , 'user_give_id' , 'user_recieve_id' ,'topic_id'];
 
     protected $hidden = ['created_at' , 'updated_at'];
 
-    protected $with = ['user_give' , 'user_recieve'];
+    protected $with = ['user_give' , 'user_recieve' , 'topic'];
 
-        
+    protected $appends = ['day'];
+
+    /** mutators */
+
+    public function getDayAttribute()
+    {
+        return  $this->day_id? WeekDays::find($this->day_id)->day : null;
+    }
+
     /** relations */
 
     public function day()
@@ -29,5 +37,10 @@ class Sessions extends Model
     public function user_recieve()
     {
         return $this->belongsTo(User::class , 'user_recieve_id');
+    }
+
+    public function topic()
+    {
+        return $this->belongsTo(Topics::class , 'topic_id');
     }
 }

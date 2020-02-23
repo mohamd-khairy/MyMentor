@@ -74,4 +74,9 @@ class Topics extends Model
     {
         return $this->belongsTo(Language::class , 'language_id');
     }
+
+    public function sessions()
+    {
+        return $this->hasMany(Sessions::class);
+    }
 }
