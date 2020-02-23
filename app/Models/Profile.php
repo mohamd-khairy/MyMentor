@@ -21,7 +21,9 @@ class Profile extends Model
         parent::boot();
 
         static::creating(function ($data) {
-            $data->user_id = auth('api')->user()->id;
+            if(auth('api')->user()){
+                $data->user_id = auth('api')->user()->id;
+            }
         });
     }
 
