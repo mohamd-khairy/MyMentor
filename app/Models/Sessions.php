@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sessions extends Model
 {
-    protected $fillable = [ 'details' , 'duration' , 'day_id' , 'user_give_id' , 'user_recieve_id' ,'topic_id'];
+    protected $fillable = [ 'details' , 'duration' , 'day_id' , 'user_give_id' , 'user_recieve_id' ,'topic_id','accept'];
 
     protected $hidden = ['created_at' , 'updated_at'];
 
@@ -22,6 +22,12 @@ class Sessions extends Model
         return  $this->day_id? WeekDays::find($this->day_id)->day : null;
     }
 
+    // public function getAcceptAttribute()
+    // {
+    //     return (boolean) $this->attribute['accept'];
+    // }
+
+    
     /** relations */
 
     public function day()

@@ -72,6 +72,7 @@ class Kernel extends HttpKernel
         'SetLocaleMiddleware' => \App\Http\Middleware\SetLocaleMiddleware::class,
         'CheckToken' => \App\Http\Middleware\CheckToken::class,
         'checkVerify' => \App\Http\Middleware\checkVerify::class,
+        'PermissionFor' => \App\Http\Middleware\PermissionFor::class,
     ];
 
     /**

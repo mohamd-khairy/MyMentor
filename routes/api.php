@@ -41,6 +41,7 @@ Route::group([
 
     Route::get('search' , 'TopicsController@search'); // done
 
+    Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');
 });
 
 Route::group([

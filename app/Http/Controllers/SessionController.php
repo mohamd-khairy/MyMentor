@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Models\Sessions;
+use Illuminate\Support\Facades\Validator;
 
 class SessionController extends Controller
 {
@@ -32,6 +33,34 @@ class SessionController extends Controller
         }
 
         return $this->add($request);  
+
+    }
+
+    public function acceptOrReject(Request $request , $session_id)
+    {
+
+        //must be mentor
+        
+        $validator = Validator::make($request->all(), [
+            'accept' => 'required'
+        ]);
+        
+        if ($validator->fails()) {    
+            return response()->json($validator->messages(), 200);
+        }
+
+        $session = Sessions::find($session_id);
+
+        $accept = (int) $request->accept == 1 ||  (string) $request->accept == "true"? 1: 0;
+
+        if($session){
+
+            $session->update(['accept' => (boolean) $accept]);
+
+            return responseSuccess($session , 'session changed successfully');
+
+        }
+            return responseFail('this session not found');
 
     }
 }
