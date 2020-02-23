@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sessions extends Model
 {
-    protected $fillable = [ 'details' , 'duration' , 'day_id' , 'user_give_id' , 'user_recieve_id' ,'topic_id','accept'];
+    protected $fillable = [ 'details' , 'duration' , 'day_id' , 'user_give_id' , 'user_recieve_id' ,'topic_id','accept','session_type'];
 
     protected $hidden = ['created_at' , 'updated_at'];
 
