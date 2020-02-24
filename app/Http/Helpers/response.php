@@ -20,20 +20,20 @@ function responseFail($msg = null)
     ] , 400);
 }
 
-function responseUnAuthorize()
+function responseUnAuthorize($msg = null)
 {
     return response()->json([
         "status" => "fail",
-        "message" => "UnAuthorize",
+        "message" => "UnAuthorize , " . $msg,
         "data" => []
     ] , 401);
 }
 
-function responseUnAuthenticated()
+function responseUnAuthenticated($msg = null)
 {
     return response()->json([
         "status" => "fail",
-        "message" => "UnAuthenticated",
+        "message" => "UnAuthenticated , " . $msg,
         "data" => []
     ] , 403);
 }

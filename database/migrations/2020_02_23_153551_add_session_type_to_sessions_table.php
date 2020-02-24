@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLanguagesTable extends Migration
+class AddSessionTypeToSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('languages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('name_1')->nullable();
-            $table->string('code')->nullable();
+        Schema::table('sessions', function (Blueprint $table) {
+            $table->enum('session_type', ['learn','ask','code review'])->after('duration');	
         });
     }
 
@@ -28,6 +25,8 @@ class CreateLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('languages');
+        Schema::table('sessions', function (Blueprint $table) {
+            $table->dropColumn('session_type');
+        });
     }
 }
