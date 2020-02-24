@@ -13,7 +13,7 @@ trait RestApi
         if (empty($data)) {
             return responseFail("data is empty");
         }
-        return responseSuccess($data);
+        return responseSuccess($data , "data returned successfully");
     }
 
     public function find($id)
@@ -24,7 +24,7 @@ trait RestApi
         if (empty($data)) {
             return responseFail("data is empty");
         }
-        return responseSuccess($data);
+        return responseSuccess($data , "data returned successfully");
     }
 
     public function put($request, $id)
@@ -40,7 +40,7 @@ trait RestApi
 
         $data->update($request);
 
-        return responseSuccess($data);
+        return responseSuccess($data , "data updated successfully");
     }
 
     public function add($request)
@@ -51,7 +51,7 @@ trait RestApi
         if (empty($data)) {
             return responseFail("data is empty");
         }
-        return responseSuccess($data);
+        return responseSuccess($data , "data added successfully");
     }
 
     public function remove($id)
@@ -65,7 +65,7 @@ trait RestApi
 
         $data->delete();
         
-        return responseSuccess($data);
+        return responseSuccess($data , "data removed successfully");
     }
 
     public function getBy($condition)
@@ -76,7 +76,7 @@ trait RestApi
         if (empty($data)) {
             return responseFail("data is empty");
         }
-        return responseSuccess($data);
+        return responseSuccess($data , "data returned successfully");
     }
 
     public function findBy($condition)
@@ -87,7 +87,7 @@ trait RestApi
         if (empty($data)) {
             return responseFail("data is empty");
         }
-        return responseSuccess($data);
+        return responseSuccess($data , "data returned successfully");
     }
 
     public function putBy($request, $condition)
@@ -101,12 +101,13 @@ trait RestApi
 
         $data->update($request->all());
 
-        return responseSuccess($data);
+        return responseSuccess($data , "data updated successfully");
     }
     
     public function filter($request)
     {
-        $availableFilter = ['user_give_id','user_recieve_id','user_id' , 'category_id' , 'language_id' , 'id'];
+        $availableFilter = (array) self::FILTERS;
+
         foreach ($request->all() as $key => $value) {
             if (in_array($key, $availableFilter)) {
                 $conditions[$key] = $value;

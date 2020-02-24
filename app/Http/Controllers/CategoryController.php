@@ -9,6 +9,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     const MODEL = Category::class;
+    const FILTERS = [];
 
     use RestApi;
 

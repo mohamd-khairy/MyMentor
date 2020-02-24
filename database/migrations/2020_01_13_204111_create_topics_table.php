@@ -21,6 +21,7 @@ class CreateTopicsTable extends Migration
             $table->string('topic')->index()->nullable();
             $table->string('subject')->index()->nullable();
             $table->text('details')->nullable();
+            $table->timestamps();
 
             $table->foreign('category_id')->references('id')
             ->on('categories')->onUpdate('cascade')->onDelete('cascade');
@@ -30,7 +31,6 @@ class CreateTopicsTable extends Migration
 
             $table->foreign('user_id')->references('id')
             ->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

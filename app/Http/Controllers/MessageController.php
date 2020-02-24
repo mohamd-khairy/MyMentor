@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
-use App\Models\Language;
+use App\Models\Message;
 
-class LanguageController extends Controller
+class MessageController extends Controller
 {
-    const MODEL = Language::class;
-    const FILTERS = ['chat_id'];
+    const MODEL = Message::class;
+    const FILTERS = [];
 
     use RestApi;
 

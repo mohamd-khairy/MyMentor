@@ -9,6 +9,7 @@ use App\Models\JobDetails;
 class JobDetailsController extends Controller
 {
     const MODEL = JobDetails::class;
+    const FILTERS = ['user_id' ];
 
     use RestApi;
 

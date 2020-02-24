@@ -9,6 +9,7 @@ use App\Models\WeekDays;
 class WeekDayController extends Controller
 {
     const MODEL = WeekDays::class;
+    const FILTERS = [];
 
     use RestApi;
 

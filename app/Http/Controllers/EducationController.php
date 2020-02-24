@@ -9,6 +9,7 @@ use App\Models\EducationDetails;
 class EducationController extends Controller
 {
     const MODEL = EducationDetails::class;
+    const FILTERS = ['user_id' ];
 
     use RestApi;
 

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +38,11 @@ Route::group([
     Route::resource('skill' , 'SkillController'); // done
     Route::resource('topic' , 'TopicsController'); // done
     Route::resource('user' , 'UserController'); // done
+    Route::resource('chat' , 'ChatController'); // done
+    Route::resource('message' , 'MessageController'); // done
 
     Route::get('search' , 'TopicsController@search'); // done
-
-    Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');
+    Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');//done
 });
 
 Route::group([
