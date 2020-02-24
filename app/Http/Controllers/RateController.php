@@ -9,6 +9,7 @@ use App\Models\Rate;
 class RateController extends Controller
 {
     const MODEL = Rate::class;
+    const FILTERS = ['user_id' , 'user_add_rate_id'];
 
     use RestApi;
 

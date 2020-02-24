@@ -9,6 +9,7 @@ use App\Models\Profile;
 class ProfileController extends Controller
 {
     const MODEL = Profile::class;
+    const FILTERS = ['user_id' ];
 
     use RestApi;
 

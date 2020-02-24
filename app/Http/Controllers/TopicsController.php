@@ -9,6 +9,7 @@ use App\Models\Topics;
 class TopicsController extends Controller
 {
     const MODEL = Topics::class;
+    const FILTERS = ['user_id' ,'language_id' ,'category_id' ];
 
     use RestApi;
 

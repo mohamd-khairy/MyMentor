@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class SessionController extends Controller
 {
     const MODEL = Sessions::class;
+    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id'];
 
     use RestApi;
 
@@ -46,7 +47,7 @@ class SessionController extends Controller
         ]);
         
         if ($validator->fails()) {    
-            return response()->json($validator->messages(), 200);
+            return response()->json($validator->messages(), 400);
         }
 
         $session = Sessions::find($session_id);

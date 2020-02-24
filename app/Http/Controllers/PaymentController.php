@@ -9,6 +9,7 @@ use App\Models\Payment;
 class PaymentController extends Controller
 {
     const MODEL = Payment::class;
+    const FILTERS = ['user_pay_id' , 'user_recieve_id'];
 
     use RestApi;
 

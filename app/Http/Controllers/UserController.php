@@ -9,6 +9,7 @@ use App\Http\Controllers\Traits\RestApi;
 class UserController extends Controller
 {
     const MODEL = User::class;
+    const FILTERS = [];
 
     use RestApi;
 
