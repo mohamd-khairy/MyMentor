@@ -15,12 +15,12 @@ class CreateChatsTable extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->unsignedBigInteger('user_id')->index('user_id');
-            $table->unsignedBigInteger('mentor_id')->index('mentor_id');
+            $table->unsignedBigInteger('user_id');//->index('user_id');
+            $table->unsignedBigInteger('mentor_id');//->index('mentor_id');
 
             
-            // $table->foreign('user_id')->references('id')
-            // ->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')
+            ->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->foreign('mentor_id')->references('id')
             ->on('users')->onUpdate('cascade')->onDelete('cascade');
