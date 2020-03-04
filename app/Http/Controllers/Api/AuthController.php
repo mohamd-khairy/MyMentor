@@ -114,7 +114,7 @@ class AuthController extends Controller
                 $user->remember_token = null;
                 $user->verified = true;
                 $user->save();
-                return responseSuccess('email verified successfully');
+                return responseSuccess([],'email verified successfully');
             }
         }
 
@@ -127,7 +127,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return responseSuccess(auth('api')->user());
+        return responseSuccess(auth('api')->user() , 'user data returned successfully');
 
     }
 
@@ -197,7 +197,7 @@ class AuthController extends Controller
             $user->resetPasswordCodeCreationdate = Carbon::now();
             if ($user->save()) {
                 Mail::to($user->email)->send(new ResetPassword($user));
-                return \responseSuccess('check your email to reset your password .');
+                return \responseSuccess([],'check your email to reset your password .');
             }
         } else {
             return \responseFail("Not Found User With this Email !");
@@ -233,7 +233,7 @@ class AuthController extends Controller
             $user->resetPasswordCode = null;
             $user->resetPasswordCodeCreationdate = null;
             $user->save();
-            return responseSuccess('password reset successfully');
+            return responseSuccess([],'password reset successfully');
         } else {
             $user->resetPasswordCode = null;
             $user->resetPasswordCodeCreationdate = null;
