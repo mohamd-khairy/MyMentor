@@ -77,6 +77,7 @@
                 </div>
 
                 <div class="links">
+                    <div><p>Code: {{$user->resetPasswordCode}}</p> </div>
                     <a href="{{url('api/v1/auth/reset/password')}}?code={{$user->resetPasswordCode}}">Reset Password</a>
 
                 </div>
