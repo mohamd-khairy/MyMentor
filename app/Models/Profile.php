@@ -14,7 +14,7 @@ class Profile extends Model
     protected $hidden = ['created_at' , 'updated_at'];
 
     protected $with = ['user'];
-    
+
     /** attach loged in user id with profile data */
     public static function boot()
     {
@@ -25,6 +25,34 @@ class Profile extends Model
                 $data->user_id = auth('api')->user()->id;
             }
         });
+    }
+
+    public function getAllAttributes()
+    {
+        $columns = $this->getFillable();
+        // Another option is to get all columns for the table like so:
+        // return  $columns = \Schema::getColumnListing('profiles');
+        // but it's safer to just get the fillable fields
+
+        $attributes = $this->getAttributes();
+
+        $i = 0;
+        foreach ($columns as $column)
+        {
+            if (!array_key_exists($column, $attributes))
+            {
+                $attributes[$column] = null;
+            }
+
+            if(!empty($attributes[$column])){
+              $i = $i + 1;
+            }
+        }
+        return [
+          'all_attributes' => $attributes,
+          'count_not_empty' => $i ?? 1,
+          'count_all' => count($columns) ?? 1,
+        ];
     }
 
     public function setDateOfBirthAttribute($input)

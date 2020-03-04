@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Http\Controllers\Traits\UserTrait;
 use App\Models\Profile;
 
 class ProfileController extends Controller
@@ -11,7 +12,7 @@ class ProfileController extends Controller
     const MODEL = Profile::class;
     const FILTERS = ['user_id' ];
 
-    use RestApi;
+    use RestApi , UserTrait;
 
     public function __construct()
     {
@@ -25,7 +26,10 @@ class ProfileController extends Controller
 
     public function update(Request $request, $id)
     {
-        return $this->putBy($request , ['user_id' => $id]);
+        $res = $this->putBy($request , ['user_id' => $id]);
+        $this->set_complete_profile_rate();
+        return $res;
+
     }
-    
+
 }
