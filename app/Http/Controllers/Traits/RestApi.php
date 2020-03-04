@@ -64,7 +64,7 @@ trait RestApi
         }
 
         $data->delete();
-        
+
         return responseSuccess($data , "data removed successfully");
     }
 
@@ -103,7 +103,7 @@ trait RestApi
 
         return responseSuccess($data , "data updated successfully");
     }
-    
+
     public function filter($request)
     {
         $availableFilter = (array) self::FILTERS;

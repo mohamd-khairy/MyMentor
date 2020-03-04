@@ -1,7 +1,5 @@
 <?php
 
-
-
 function responseSuccess($data = [] , $msg = null)
 {
     return response()->json( [
