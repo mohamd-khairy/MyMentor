@@ -15,8 +15,6 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'host_url' => env('HOST_URL', 'https://infinite-atoll-41509.herokuapp.com/api/v1/'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Environment
