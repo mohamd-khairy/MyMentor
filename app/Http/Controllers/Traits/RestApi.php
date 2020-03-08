@@ -99,7 +99,14 @@ trait RestApi
             return responseFail("data is empty");
         }
 
-        $data->update($request->all());
+        $data = $request->all();
+
+        if($request->photo){
+            $data['photo'] = $request->photo->store('/video');
+        }
+
+
+        $data->update($data);
 
         return responseSuccess($data , "data updated successfully");
     }
