@@ -61,10 +61,10 @@ class Profile extends Model
     }
 
 
-    // public function getPhotoAttribute()
-    // {
-    //     return  !empty($this->photo)? config('app.host_url').$this->photo : null;
-    // }
+    public function getPhotoAttribute()
+    {
+        return  !empty($this->photo)? config('app.host_url').$this->photo : null;
+    }
 
     /** relations */
     public function user()
