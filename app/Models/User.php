@@ -30,7 +30,7 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['user_type' ,'profile'];
+    protected $with = ['user_type'];
 
 
     public function setPasswordAttribute($input)
@@ -49,7 +49,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class , 'user_id');
     }
 
     public function user_type()
