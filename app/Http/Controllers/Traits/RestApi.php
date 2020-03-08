@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Traits;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 trait RestApi
 {
@@ -64,7 +65,7 @@ trait RestApi
         }
 
         $data->delete();
-
+        
         return responseSuccess($data , "data removed successfully");
     }
 
@@ -99,11 +100,19 @@ trait RestApi
             return responseFail("data is empty");
         }
 
-        $data->update($request->all());
+        $all_data = $request->all();
+
+        if($request->photo){
+            Storage::delete($data->photo);
+            $all_data['photo'] = $request->photo->store('/users/profile');
+        }
+
+
+        $data->update($all_data);
 
         return responseSuccess($data , "data updated successfully");
     }
-
+    
     public function filter($request)
     {
         $availableFilter = (array) self::FILTERS;
