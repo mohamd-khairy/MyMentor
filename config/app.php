@@ -2,7 +2,7 @@
 
 return [
 
-    'host_url' => env('HOST_URL', 'https://infinite-atoll-41509.herokuapp.com/api/v1/'),
+    'host_url' => env('HOST_URL', 'https://infinite-atoll-41509.herokuapp.com/storage'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
