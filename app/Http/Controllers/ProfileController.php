@@ -21,12 +21,14 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        return $this->findBy(['user_id' => $id]);
+        $current_id = auth('api')->user()->id;
+        return $this->findBy(['user_id' => $current_id]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request , $id)
     {
-        $res = $this->putBy($request , ['user_id' => $id]);
+        $current_id = auth('api')->user()->id;
+        $res = $this->putBy($request , ['user_id' => $current_id]);
         $this->set_complete_profile_rate();
         return $res;
 
