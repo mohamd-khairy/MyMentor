@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Traits;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 trait RestApi
 {
@@ -102,7 +103,8 @@ trait RestApi
         $all_data = $request->all();
 
         if($request->photo){
-            $all_data['photo'] = $request->photo->store('/video');
+            Storage::delete($data->photo);
+            $all_data['photo'] = $request->photo->store('/users/profile');
         }
 
 

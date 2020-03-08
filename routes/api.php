@@ -42,6 +42,8 @@ Route::group([
     Route::resource('message' , 'MessageController'); // done
 
 
+    Route::post('profile' , 'ProfileController@update_profile'); // done
+
     Route::get('search' , 'TopicsController@search'); // done
 
     Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');//done
