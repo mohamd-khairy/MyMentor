@@ -2,6 +2,7 @@
 
 return [
 
+    'host_url' => env('HOST_URL', 'https://infinite-atoll-41509.herokuapp.com/storage'),
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -14,7 +15,6 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -15,9 +15,12 @@ use App\Mail\EmailVerify;
 use App\Mail\ResetPassword;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Traits\UserTrait;
 
 class AuthController extends Controller
 {
+    use UserTrait;
+
     private $userObj;
     /**
      * Create a new AuthController instance.
@@ -46,6 +49,9 @@ class AuthController extends Controller
 
         /** update user data to be active */
         auth('api')->user()->update(['is_active' => 1]);
+
+        $this->set_complete_profile_rate();
+        $this->set_rate(auth('api')->user()->id);
 
         return $this->respondWithToken($token);
     }
@@ -101,7 +107,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'token' => 'required|string|max:100',
         ]);
-    
+
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
@@ -114,7 +120,7 @@ class AuthController extends Controller
                 $user->remember_token = null;
                 $user->verified = true;
                 $user->save();
-                return responseSuccess('email verified successfully');
+                return responseSuccess([],'email verified successfully');
             }
         }
 
@@ -127,7 +133,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return responseSuccess(auth('api')->user());
+        return responseSuccess(auth('api')->user() , 'user data returned successfully');
 
     }
 
@@ -157,7 +163,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:100',
         ]);
-    
+
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
@@ -197,7 +203,7 @@ class AuthController extends Controller
             $user->resetPasswordCodeCreationdate = Carbon::now();
             if ($user->save()) {
                 Mail::to($user->email)->send(new ResetPassword($user));
-                return \responseSuccess('check your email to reset your password .');
+                return \responseSuccess([],'check your email to reset your password .');
             }
         } else {
             return \responseFail("Not Found User With this Email !");
@@ -217,11 +223,11 @@ class AuthController extends Controller
             'code'   => 'required|min:8|max:100',
             'newPassword'   => 'required|min:8|max:100'
         ]);
-    
+
         if($validator->fails()){
             return response()->json($validator->errors(),400);
         }
-       
+
         $user = User::where("resetPasswordCode", $request->code)->first();
         if (empty($user)) {
             return responseFail('not fount this user');
@@ -233,7 +239,7 @@ class AuthController extends Controller
             $user->resetPasswordCode = null;
             $user->resetPasswordCodeCreationdate = null;
             $user->save();
-            return responseSuccess('password reset successfully');
+            return responseSuccess([],'password reset successfully');
         } else {
             $user->resetPasswordCode = null;
             $user->resetPasswordCodeCreationdate = null;

@@ -41,12 +41,19 @@ Route::group([
     Route::resource('chat' , 'ChatController'); // done
     Route::resource('message' , 'MessageController'); // done
 
+
+    Route::post('profile' , 'ProfileController@update_profile'); // done
+
     Route::get('search' , 'TopicsController@search'); // done
+
     Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');//done
+
+    Route::get('most_popular_mentor', 'UserController@most_popular_mentor'); //done
+
 });
 
 Route::group([
-    
+
     'middleware' => 'api',
     'namespace' => 'Api',
     'prefix' => 'v1'
@@ -58,5 +65,6 @@ Route::group([
     Route::get('auth/verify', 'AuthController@verify');
     Route::post('auth/forget/password', 'AuthController@forgetPassword');
     Route::post('auth/reset/password', 'AuthController@resetPassword');
+
 
 });

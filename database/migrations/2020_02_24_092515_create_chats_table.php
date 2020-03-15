@@ -17,6 +17,7 @@ class CreateChatsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('mentor_id');
+            $table->timestamps();
 
             
             $table->foreign('user_id')->references('id')
@@ -24,8 +25,6 @@ class CreateChatsTable extends Migration
 
             $table->foreign('mentor_id')->references('id')
             ->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
-
         });
     }
 
