@@ -15,18 +15,14 @@ class Sessions extends Model
 
     protected $appends = ['day'];
 
+    protected $casts = [ "accept" => "boolean"];
+
     /** mutators */
 
     public function getDayAttribute()
     {
         return  $this->day_id? WeekDays::find($this->day_id)->day : null;
     }
-
-    // public function getAcceptAttribute()
-    // {
-    //     return (boolean) $this->attribute['accept'];
-    // }
-
     
     /** relations */
 
