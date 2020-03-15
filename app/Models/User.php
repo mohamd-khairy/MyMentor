@@ -18,11 +18,11 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token'
+        'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
     ];
 
     protected $hidden = [
-        'is_active', 'verified', 'password', 'remember_token', 'created_at' , 'updated_at' 
+        'is_active', 'verified', 'password', 'remember_token', 'created_at' , 'updated_at'
         , 'email_verified_at' , 'resetPasswordCode' , 'resetPasswordCodeCreationdate'
     ];
 
@@ -32,26 +32,36 @@ class User extends Authenticatable implements JWTSubject
 
     protected $with = ['user_type'];
 
+
     public function setPasswordAttribute($input)
     {
         $this->attributes['password'] = Hash::make($input);
     }
-    
+
     /** email to lower case when create user */
     public function setEmailAttribute($input)
     {
         $this->attributes['email'] = strtolower($input);
     }
 
-    
+
     /** relations */
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class , 'user_id');
+    }
 
     public function user_type()
     {
         return $this->belongsTo(UserType::class , 'user_type_id');
     }
 
-   
+    public function rates()
+    {
+        return $this->hasMany(Rate::class , 'user_add_rate_id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
