@@ -69,7 +69,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function topics()
     {
-        return $this->hasMany(Topics::class , 'user_id')->latest()->first();
+        return $this->hasOne(Topics::class , 'user_id')->latest()->first();
     }
 
     /**
