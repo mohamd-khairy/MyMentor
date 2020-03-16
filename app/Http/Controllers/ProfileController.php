@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
     public function show_mentor_profile($id)
     {
-        $data = User::with('topics')->find($id);
+        $data = User::with('profile','topics')->find($id);
 
         if($data->user_type->id != 1 || (string) $data->user_type->user_type_name != "mentor"){
             return responseFail("this id not belong to mentor !");
