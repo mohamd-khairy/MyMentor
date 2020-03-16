@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Http\Controllers\Traits\UserTrait;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -18,6 +19,17 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+    }
+
+    public function show($id)
+    {
+        $data = User::find($id);
+        if($data->user_type->id != 1 || (string) $data->user_type->user_type_name != "mentor"){
+            return responseFail("this id not belong to mentor user type !");
+        }
+
+        return $this->find($id);
+
     }
 
     public function show_my_profile()
