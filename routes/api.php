@@ -43,7 +43,7 @@ Route::group([
 
 
     Route::post('profile' , 'ProfileController@update_profile'); // done
-    Route::get('mentor-profile' , 'ProfileController@show_mentor_profile'); // done
+    Route::get('mentor-profile/{id}' , 'ProfileController@show_mentor_profile'); // done
     
     Route::get('search' , 'TopicsController@search'); // done
 
