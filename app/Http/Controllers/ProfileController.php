@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function show($id)
+    public function show_my_profile()
     {
         $current_id = auth('api')->user()->id;
         return $this->findBy(['user_id' => $current_id]);

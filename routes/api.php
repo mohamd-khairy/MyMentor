@@ -43,7 +43,8 @@ Route::group([
 
 
     Route::post('profile' , 'ProfileController@update_profile'); // done
-
+    Route::get('my-profile' , 'ProfileController@show_my_profile'); // done
+    
     Route::get('search' , 'TopicsController@search'); // done
 
     Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');//done
