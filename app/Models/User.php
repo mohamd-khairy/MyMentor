@@ -64,7 +64,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function jobs()
     {
-        return $this->hasMany(JobDetails::class , 'user_id')->limit(1);
+        return $this->hasMany(JobDetails::class , 'user_id');
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topics::class , 'user_id');
     }
 
     /**
