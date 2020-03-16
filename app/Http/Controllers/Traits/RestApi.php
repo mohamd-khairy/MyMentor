@@ -109,7 +109,6 @@ trait RestApi
             $request->photo->move(public_path('images'), $imageName);
 
             $all_data['photo'] = 'images/'.$imageName;// $request->photo->store('/users/profile');
-
         }
 
 

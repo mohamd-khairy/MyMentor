@@ -18,4 +18,13 @@ class JobDetailsController extends Controller
         $this->middleware('auth:api');
     }
     
+    public function store(Request $request)
+    {
+        $data = JobDetails::create($request->all());
+
+        if (empty($data)) {
+            return responseFail("data is empty");
+        }
+        return responseSuccess($data , "data added successfully");
+    }
 }

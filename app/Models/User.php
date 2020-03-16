@@ -62,6 +62,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Rate::class , 'user_add_rate_id');
     }
 
+    public function jobs()
+    {
+        return $this->hasMany(JobDetails::class , 'user_id');
+    }
+
+    public function topics()
+    {
+        return $this->hasOne(Topics::class , 'user_id')->latest();
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
