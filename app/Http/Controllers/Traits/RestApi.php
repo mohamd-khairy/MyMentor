@@ -47,7 +47,7 @@ trait RestApi
     public function add($request)
     {
         $model = self::MODEL;
-        $data =[];// $model::firstOrCreate($request->all());
+        $data = $model::firstOrCreate($request->all());
 
         if (empty($data)) {
             return responseFail("data is empty");
