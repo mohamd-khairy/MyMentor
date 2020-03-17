@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\WeekDays;
+use Intervention\Image\ImageManagerStatic as Image;
 
 function getUser($condition)
 {
@@ -11,4 +12,10 @@ function getUser($condition)
 function getDay($condition)
 {
     return WeekDays::where($condition)->first();
+}
+
+Function resize_image($image)
+{
+    $image_resize = Image::make($image);
+    return  $image_resize->resize(300, 300);
 }
