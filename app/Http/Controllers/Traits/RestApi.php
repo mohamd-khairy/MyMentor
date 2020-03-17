@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Traits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Image;
 
 trait RestApi
 {
@@ -107,10 +106,8 @@ trait RestApi
             Storage::delete($data->photo);
             // $all_data['photo'] = $request->photo->store('/users/profile');
             $imageName = time().'.'. $request->photo->getClientOriginalExtension();
-            resize_image($request->photo)->move(public_path('images'), $imageName);
-            // $image = Image::make($request->photo);
-            // $image->resize(150, 150);
-            // $image->move(public_path('images'), $imageName);
+            $request->photo->move(public_path('images'), $imageName);
+
             $all_data['photo'] = 'images/'.$imageName;// $request->photo->store('/users/profile');
         }
 
