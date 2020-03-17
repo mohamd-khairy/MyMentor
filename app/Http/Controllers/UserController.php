@@ -33,7 +33,7 @@ class UserController extends Controller
       return responseSuccess($data , 'data returned successfully');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
       return app("App\Http\Controllers\Api\AuthController")->register($request);
     }
