@@ -14,7 +14,7 @@ function getDay($condition)
     return WeekDays::where($condition)->first();
 }
 
-Function resize_image($image)
+function resize_image($image)
 {
     $image_resize = Image::make($image);
     return  $image_resize->resize(300, 300);
