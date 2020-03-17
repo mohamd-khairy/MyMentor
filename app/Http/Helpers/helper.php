@@ -17,5 +17,5 @@ function getDay($condition)
 function resize_image($image)
 {
     $image_resize = Image::make($image);
-    return  $image_resize->resize(300, 300);
+    return  $image_resize->resize(100, 100);
 }
