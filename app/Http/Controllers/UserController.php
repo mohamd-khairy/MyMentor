@@ -33,8 +33,20 @@ class UserController extends Controller
       return responseSuccess($data , 'data returned successfully');
     }
 
-    public function store(RegisterRequest $request)
+    public function store(Request $request)
     {
+      $validator = Validator::make($request->all(), [
+        'first_name' => 'required|min:3|max:50',
+        'last_name' => 'required|min:3|max:50',
+        'mobile' => 'required|unique:profiles|min:10',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:6'
+      ]);
+
+      if($validator->fails()){
+          return response()->json($validator->errors(),400);
+      }
+
       return app("App\Http\Controllers\Api\AuthController")->register($request);
     }
 
