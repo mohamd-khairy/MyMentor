@@ -32,49 +32,4 @@ class UserController extends Controller
       return responseSuccess($data , 'data returned successfully');
     }
 
-    public function store(Request $request)
-    {
-      $validator = Validator::make($request->all(), [
-        'name' => 'required|min:3|max:50',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6'
-      ]);
-      
-      if ($validator->fails()) {    
-          return response()->json($validator->messages(), 400);
-      }
-
-      /** convert request data to array */
-      $data = $request->all();
-      /** assign fisrt and last name to name field */
-      $data['name'] = $request->first_name . " " . $request->last_name;
-      $data['remember_token'] = Str::random(20);
-      /** start transaction */
-      DB::beginTransaction();
-      /** create user */
-      $user = User::create($data);
-
-      if ($user) {
-          $data['user_id'] = $user->id;
-          /** create profile for this user */
-          $profile = Profile::create($data);
-      }
-
-      if ($profile) {
-          /** send verify email to new user */
-          Mail::to($user->email)->send(new EmailVerify($user));
-
-           /** commit database action */
-           DB::commit();
-
-          /** return json response with user data */
-          return responseSuccess($user , 'Your Account Created successfully , and verified email has been sent.');
-      }
-      /** rollback the database action */
-      DB::rollback();
-      /** return json response with unauthorize message */
-      return responseUnAuthorize();
-  
-    }
-
 }
