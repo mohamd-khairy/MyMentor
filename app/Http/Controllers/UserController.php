@@ -6,7 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\UserTrait;
 use App\Http\Controllers\Traits\RestApi;
+use App\Http\Requests\RegisterRequest;
+use App\Mail\EmailVerify;
+use App\Models\Profile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -27,20 +33,9 @@ class UserController extends Controller
       return responseSuccess($data , 'data returned successfully');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
-      $validator = Validator::make($request->all(), [
-        'name' => 'required|min:3|max:50',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:6'
-      ]);
-      
-      if ($validator->fails()) {    
-          return response()->json($validator->messages(), 400);
-      }
-
-      return $this->add($request);        
-
+      return app("App\Http\Controllers\Api\AuthController")->reqister($request);
     }
 
 }
