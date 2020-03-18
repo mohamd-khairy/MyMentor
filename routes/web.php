@@ -11,6 +11,11 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
+    $faker = \Faker\Factory::create();
+    return $faker->imageUrl();
+
     return view('welcome');
 });

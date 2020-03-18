@@ -72,6 +72,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Topics::class , 'user_id')->latest();
     }
 
+    public function topicss()
+    {
+        return $this->hasMany(Topics::class , 'user_id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
