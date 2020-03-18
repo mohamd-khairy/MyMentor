@@ -29,7 +29,7 @@ class CreateProfilesTable extends Migration
             $table->string('gender')->nullable();
             $table->tinyInteger('marital_status')->nullable();
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')
             ->on('users')->onUpdate('cascade')->onDelete('cascade');
 

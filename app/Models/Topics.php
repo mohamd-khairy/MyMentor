@@ -54,7 +54,9 @@ class Topics extends Model
         parent::boot();
 
         static::creating(function ($data) {
-            $data->user_id = auth('api')->user()->id;
+            if(auth('api')->user()){
+                $data->user_id = auth('api')->user()->id;
+            }
         });
     }
     
@@ -62,7 +64,7 @@ class Topics extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function category()
