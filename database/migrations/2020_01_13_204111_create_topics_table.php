@@ -15,9 +15,9 @@ class CreateTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->index('user_id')->nullable();
-            $table->unsignedBigInteger('category_id')->index('category_id')->nullable();
-            $table->unsignedBigInteger('language_id')->index('language_id')->nullable();
+            $table->unsignedBigInteger('user_id')->index()->nullable();
+            $table->unsignedBigInteger('category_id')->index()->nullable();
+            $table->unsignedBigInteger('language_id')->index()->nullable();
             $table->string('topic')->index()->nullable();
             $table->string('subject')->index()->nullable();
             $table->text('details')->nullable();
