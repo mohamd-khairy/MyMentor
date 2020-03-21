@@ -15,6 +15,8 @@ class JobDetails extends Model
 
     protected $with = ['user','topic'];
     
+    protected $appends = ['photo'];
+
     public function setAvailableLangsAttribute($input)
     {
         $this->attributes['available_langs'] = json_encode($input);
@@ -58,6 +60,13 @@ class JobDetails extends Model
         }
 
         return $days_names;
+    }
+
+    public function getPhotoAttribute()
+    {
+
+        return $this->user->profile->photo ?? null;
+
     }
 
     /** attach loged in user id with profile data */
