@@ -37,7 +37,7 @@ class JobDetails extends Model
             $collection = new Collection($langs);
             
             $language_names = $collection->map(function($item, $key) {
-                return Language::where('id' , $item)->first()->name;
+                return Language::where('id' , $item)->first()->name_1;
             });
         }
 
