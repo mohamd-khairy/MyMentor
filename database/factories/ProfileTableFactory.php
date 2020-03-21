@@ -19,6 +19,6 @@ $factory->define(Profile::class, function (Faker $faker) {
         'date_of_birth' => $faker->date,
         'marital_status' => 1,
         'gender' => 'male',
-        'photo' => $faker->image('public/images')
+        'photo' => $faker->image('public')
     ];
 });
