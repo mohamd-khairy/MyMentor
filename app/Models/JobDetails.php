@@ -65,7 +65,7 @@ class JobDetails extends Model
     public function getPhotoAttribute()
     {
 
-        return $this->user->profile;
+        return $this->user->profile->photo ?? null;
 
     }
 
