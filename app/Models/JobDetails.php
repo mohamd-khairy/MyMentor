@@ -13,9 +13,9 @@ class JobDetails extends Model
 
     protected $hidden = ['created_at' , 'updated_at'];
 
-    protected $with = ['user','topic'];
+    protected $with = ['user'];
     
-    protected $appends = ['photo'];
+    protected $appends = ['photo' , 'topic'];
 
     public function setAvailableLangsAttribute($input)
     {
@@ -66,6 +66,17 @@ class JobDetails extends Model
     {
 
         return $this->user->profile->photo ?? null;
+
+    }
+
+    public function getTopicAttribute()
+    {
+
+        return [
+            'topic' => $this->topic()->topic,
+            'subject' => $this->topic()->subject,
+            'details' => $this->topic()->details,
+        ];
 
     }
 
