@@ -30,7 +30,7 @@ Route::group([
     Route::resource('category' , 'CategoryController'); // done
     Route::resource('education' , 'EducationController'); // done
     Route::resource('experience' , 'ExperienceController'); // done
-    Route::resource('job' , 'JobDetailsController'); // done
+    Route::resource('class' , 'JobDetailsController'); // done
     Route::resource('payment' , 'PaymentController'); // done check table database
     Route::resource('profile' , 'ProfileController'); // done
     Route::resource('rate' , 'RateController'); // done

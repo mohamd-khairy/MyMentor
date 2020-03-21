@@ -15,6 +15,7 @@ class JobDetails extends Model
 
     protected $with = ['user','topic'];
     
+    protected $appends = ['photo'];
 
     public function setAvailableLangsAttribute($input)
     {
@@ -37,7 +38,7 @@ class JobDetails extends Model
             $collection = new Collection($langs);
             
             $language_names = $collection->map(function($item, $key) {
-                return Language::where('id' , $item)->first()->name;
+                return Language::where('id' , $item)->first()->name_1;
             });
         }
 
@@ -59,6 +60,13 @@ class JobDetails extends Model
         }
 
         return $days_names;
+    }
+
+    public function getPhotoAttribute()
+    {
+
+        return $this->user->profile->photo ?? null;
+
     }
 
     /** attach loged in user id with profile data */
