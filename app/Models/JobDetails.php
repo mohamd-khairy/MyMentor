@@ -73,9 +73,9 @@ class JobDetails extends Model
     {
 
         return [
-            'topic' => $this->topic()->topic,
-            'subject' => $this->topic()->subject,
-            'details' => $this->topic()->details,
+            'topic' => $this->topic->topic,
+            'subject' => $this->topic->subject,
+            'details' => $this->topic->details,
         ];
 
     }
