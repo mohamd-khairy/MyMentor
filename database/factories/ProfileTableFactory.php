@@ -18,7 +18,7 @@ $factory->define(Profile::class, function (Faker $faker) {
         'postal_code' => $faker->postcode,
         'date_of_birth' => $faker->date,
         'marital_status' => 1,
-        'gender' => 'male',
-        'photo' => $faker->image
+        'gender' => 'male'
+        // 'photo' => $faker->image
     ];
 });
