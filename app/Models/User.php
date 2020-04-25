@@ -19,7 +19,7 @@ class User extends VUSER implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
+       'role_id', 'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
     ];
 
     protected $hidden = [
