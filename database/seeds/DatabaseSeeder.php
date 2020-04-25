@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'verified' => 1,
             'user_type_id' => 1,
+            'role_id' => 1
         ])->each(function($u){
             $u->profile()->save(factory('App\Models\Profile')->create());
             $u->topicss()->save(factory('App\Models\Topics')->create());
