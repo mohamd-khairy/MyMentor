@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguagesSeeder::class);
         $this->call(CategoriesSeeder::class);
         
+        //admin
         factory('App\Models\User')->create([
             'name' => "mohamed",
             'email' => "m.khairy@evntoo.com",
@@ -33,23 +34,22 @@ class DatabaseSeeder extends Seeder
             $u->topicss()->save(factory('App\Models\Topics')->create());
         });
         
-        //users
-        factory('App\Models\User', 10)->create([
-            'user_type_id' => 2,
-        ])
-        ->each(function($u){
-            $u->profile()->save(factory('App\Models\Profile')->create());
-        });
-
         //mentors
         factory('App\Models\User', 10)->create([
-            'user_type_id' => 1,
+            'user_type_id' => 2,
         ])
         ->each(function($u){
             $u->profile()->save(factory('App\Models\Profile')->create());
             $u->topicss()->save(factory('App\Models\Topics')->create());
         });
 
+        //users
+        factory('App\Models\User', 10)->create([
+            'user_type_id' => 3,
+        ])
+        ->each(function($u){
+            $u->profile()->save(factory('App\Models\Profile')->create());
+        });
         
     }
 }

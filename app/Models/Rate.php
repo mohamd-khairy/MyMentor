@@ -18,9 +18,16 @@ class Rate extends Model
     {
         parent::boot();
 
-        static::creating(function ($data) {
-            $data->user_id = auth('api')->user()->id;
-        });
+        try {
+            static::creating(function ($data) {
+                if(empty($data->user_id) && auth('api')->user()){
+                    $data->user_id = auth('api')->user()->id;
+                }
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
     }
     
     /** relations */
