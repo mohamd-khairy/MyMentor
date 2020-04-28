@@ -15,10 +15,14 @@ class UserTypeSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'user_type_name' => 'mentor'
+                'user_type_name' => 'admin'
             ],
             [
                 'id' => 2,
+                'user_type_name' => 'mentor'
+            ],
+            [
+                'id' => 3,
                 'user_type_name' => 'user'
             ]
         ];

@@ -20,11 +20,15 @@ class Profile extends Model
     {
         parent::boot();
 
-        static::creating(function ($data) {
-            if(auth('api')->user()){
-                $data->user_id = auth('api')->user()->id;
-            }
-        });
+        try {
+            static::creating(function ($data) {
+                if(empty($data->user_id) && auth('api')->user()){
+                    $data->user_id = auth('api')->user()->id;
+                }
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
     }
 
     public function getAllAttributes()
