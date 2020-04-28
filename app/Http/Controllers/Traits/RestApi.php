@@ -104,11 +104,10 @@ trait RestApi
 
         if($request->photo){
             Storage::delete($data->photo);
-            // $all_data['photo'] = $request->photo->store('/users/profile');
-            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
-            $request->photo->move(public_path('images'), $imageName);
-
-            $all_data['photo'] = 'images/'.$imageName;// $request->photo->store('/users/profile');
+            $all_data['photo'] = $request->photo->store('/users/profile');
+            // $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            // $request->photo->move(public_path('images'), $imageName);
+            // $all_data['photo'] = 'images/'.$imageName;// $request->photo->store('/users/profile');
         }
 
 

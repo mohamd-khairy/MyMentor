@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Profile extends Model
 {
@@ -67,7 +68,13 @@ class Profile extends Model
 
     public function getPhotoAttribute()
     {
-        return  $this->attributes['photo']? config('app.host_url').'/'.$this->attributes['photo']: null;
+        $url = $_SERVER['HTTP_HOST'] == 'localhost:8000' ? 'http://localhost:8000' : config('app.host_url');
+        $file = $url.'/'.$this->attributes['photo'];
+
+        if(isset($this->attributes['photo'])){
+            return $this->attributes['photo'];
+        }
+
     }
 
     /** relations */
