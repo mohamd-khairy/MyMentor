@@ -71,12 +71,18 @@
                 </div>
 
                 <div class="links col-lg-12">
-                        
+
                     <p>Your registered email-id is <h5>{{$user->email}}</h5> , Please click on the below link to verify your email account
                     </p>
+                    <br>
+                    <div><p>token: {{$user->remember_token}}</p> </div>
+
                         <br/>
-                    <a href="{{url('api/v1/auth/verify')}}?token={{$user->remember_token}}">Verify Email</a>
-                      
+                    <a href="{{url('api/v1/auth/verify')}}?token={{$user->remember_token}}">Verify Email api</a>
+                    <br>
+                    <br>
+                    <a href="http://localhost:4200/verify-email?token={{$user->remember_token}}">Verify Email angular </a>
+
                 </div>
             </div>
         </div>
