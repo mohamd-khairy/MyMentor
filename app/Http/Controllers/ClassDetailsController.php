@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
-use App\Models\JobDetails;
+use App\Models\ClassDetails;
 
-class JobDetailsController extends Controller
+class ClassDetailsController extends Controller
 {
-    const MODEL = JobDetails::class;
+    const MODEL = ClassDetails::class;
     const FILTERS = ['user_id' ];
 
     use RestApi;
@@ -20,7 +20,7 @@ class JobDetailsController extends Controller
     
     public function store(Request $request)
     {
-        $data = JobDetails::create($request->all());
+        $data = ClassDetails::create($request->all());
 
         if (empty($data)) {
             return responseFail("data is empty");

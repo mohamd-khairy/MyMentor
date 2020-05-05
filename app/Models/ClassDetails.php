@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Collection;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
-class JobDetails extends Model
+class ClassDetails extends Model
 {
     protected $fillable = ['available_days' , 'available_langs' , 'session_price' , 'session_duration_type',
-    'session_duration' , 'current_job' , 'current_company', 'brief' , 'user_id'];
+        'session_duration' , 'user_id' , 'topic_id'];
 
     protected $hidden = ['created_at' , 'updated_at'];
+
+    protected $with = ['user','topic'];
+    
+    protected $appends = ['photo'];
 
     public function setAvailableLangsAttribute($input)
     {
@@ -57,27 +62,37 @@ class JobDetails extends Model
         return $days_names;
     }
 
+    public function getPhotoAttribute()
+    {
 
-      /** attach loged in user id with profile data */
-      public static function boot()
-      {
-          parent::boot();
-  
-          try {
-              static::creating(function ($data) {
-                  if(empty($data->user_id) && auth('api')->user()){
-                      $data->user_id = auth('api')->user()->id;
-                  }
-              });
-          } catch (\Throwable $th) {
-              return $th;
-          }
-      }
-      
-      /** relations */
-      public function user()
-      {
-          return $this->belongsTo(User::class , 'user_id');
-      }
+        return $this->user->profile->photo ?? null;
 
+    }
+
+    /** attach loged in user id with profile data */
+    public static function boot()
+    {
+        parent::boot();
+
+        try {
+            static::creating(function ($data) {
+                if(empty($data->user_id) && auth('api')->user()){
+                    $data->user_id = auth('api')->user()->id;
+                }
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+    }
+    
+    /** relations */
+    public function user()
+    {
+        return $this->belongsTo(User::class , 'user_id');
+    }
+
+    public function topic()
+    {
+        return $this->belongsTo(Topics::class , 'topic_id');
+    }
 }

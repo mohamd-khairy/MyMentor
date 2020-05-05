@@ -93,9 +93,9 @@ class User extends VUSER implements JWTSubject
         return $this->hasOne(JobDetails::class , 'user_id')->latest();
     }
 
-    public function jobs()
+    public function classes()
     {
-        return $this->hasMany(JobDetails::class , 'user_id');
+        return $this->hasMany(ClassDetails::class , 'user_id');
     }
 
     /**
