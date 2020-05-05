@@ -81,7 +81,7 @@
                     <a href="{{url('api/v1/auth/reset/password')}}?code={{$user->resetPasswordCode}}">Reset Password api </a>
                     <br>
                     <br>
-                    <a href="http://localhost:4200/reset-password?code={{$user->resetPasswordCode}}">Reset Password angular </a>
+                    <a href="http://localhost:4200/reset-password/{{$user->resetPasswordCode}}">Reset Password angular </a>
 
                 </div>
             </div>
