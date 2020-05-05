@@ -69,7 +69,7 @@ class Profile extends Model
     public function getPhotoAttribute()
     {
         $url = $_SERVER['HTTP_HOST'] == 'localhost:8000' ? 'http://localhost:8000' : config('app.host_url');
-        $file = $url.'/storage/'.$this->attributes['photo'];
+        $file = $url.'/'.$this->attributes['photo'];
 
         if(isset($this->attributes['photo'])){
             return $file;//$this->attributes['photo'];
