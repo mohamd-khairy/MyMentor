@@ -72,7 +72,7 @@ class Profile extends Model
         $file = $url.'/'.$this->attributes['photo'];
 
         if(isset($this->attributes['photo'])){
-            return $this->attributes['photo'];
+            return $file;//$this->attributes['photo'];
         }
 
     }
