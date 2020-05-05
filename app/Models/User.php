@@ -80,7 +80,7 @@ class User extends VUSER implements JWTSubject
 
     public function skills()
     {
-        return $this->hasMany(SkillDetails::class);
+        return $this->hasMany(SkillDetails::class ,'user_id');
     }
 
     /**
