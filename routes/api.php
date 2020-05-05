@@ -40,6 +40,7 @@ Route::group([
     Route::resource('user' , 'UserController'); // done
     Route::resource('chat' , 'ChatController'); // done
     Route::resource('message' , 'MessageController'); // done
+    Route::resource('job' , 'JobDetailsController'); // done
 
 
     Route::post('profile' , 'ProfileController@update_profile'); // done
