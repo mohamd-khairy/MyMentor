@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function most_popular_mentor()
     {
-      $data = User::with('profile','topics')->where(['user_type_id' => 1])->orderBy('complete_profile_rate' , 'desc')->take(5)->get() ?? [];
+      $data = User::with('profile','topics','skills:skill_name')->where(['user_type_id' => 1])->orderBy('complete_profile_rate' , 'desc')->take(5)->get() ?? [];
 
       return responseSuccess($data , 'data returned successfully');
     }
