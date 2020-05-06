@@ -65,10 +65,16 @@ class ProfileController extends Controller
         $current_id = auth('api')->user()->id;
         $res = $this->putBy($request , ['user_id' => $current_id]);
         
-        $user =auth('api')->user();
-        $user->name = $request->first_name.' ' .$request->middle_name.' ' .$request->last_name;
-        $user->save();
+        if($request->first_name){
+            $f = $request->first_name ?? auth('api')->user()->name;
+            $m= $request->middle_name ?? '';
+            $l= $request->last_name ?? '';
 
+            $user =auth('api')->user();
+            $user->name = $f.' '.$m.' '.$l;
+            $user->save();
+        }
+        
         $this->set_complete_profile_rate();
         return $res;
 
