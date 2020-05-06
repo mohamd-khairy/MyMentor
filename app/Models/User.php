@@ -31,7 +31,7 @@ class User extends VUSER implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['user_type'];
+    protected $with = ['user_type' ,'profile'];
 
 
     public function setPasswordAttribute($input)
