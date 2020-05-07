@@ -52,17 +52,18 @@ class ProfileController extends Controller
 
     public function update_profile(Request $request)
     {
+        $current_id = auth('api')->user()->id;
+
         $validator = Validator::make($request->all(), [
             "photo" => "nullable|image|mimes:jpeg,jpg,png|max:512",
-            'phone_number' => 'nullable|unique:profiles,id|min:10',
-            'mobile' => 'nullable|unique:profiles,id|min:10'
+            'phone_number' => 'nullable|unique:profiles,id,'.$current_id.'|min:10',
+            'mobile' => 'nullable|unique:profiles,id'.$current_id.'|min:10'
         ]);
          
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 400);
         }
 
-        $current_id = auth('api')->user()->id;
         $res = $this->putBy($request , ['user_id' => $current_id]);
         
         if($request->first_name){
