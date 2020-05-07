@@ -76,7 +76,7 @@ class ProfileController extends Controller
             $user->save();
         }
         
-        $this->set_complete_profile_rate();
+        return $this->set_complete_profile_rate();
         return $res;
 
     }

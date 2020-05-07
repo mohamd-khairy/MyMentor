@@ -8,7 +8,7 @@ trait UserTrait
     public function set_complete_profile_rate()
     {
       $user = auth('api')->user();
-      $data = $user->job ? $user->job->getAllAttributes() : [];
+      return $data = $user->job ? $user->job->getAllAttributes() : [];
       $complete_profile_rate = 0 ;
 
       if($data){
