@@ -81,7 +81,9 @@
                     <a href="{{url('api/v1/auth/verify')}}?token={{$user->remember_token}}">Verify Email api</a>
                     <br>
                     <br>
-                    <a href="http://localhost:4200/verify-email?token={{$user->remember_token}}">Verify Email angular </a>
+                    <a href="http://localhost:4200/verify-email?token={{$user->remember_token}}">Verify Email angular Local</a>
+                    <br>
+                    <a href="https://mohamd-khairy.github.io/mymentor-angular/verify-email?token={{$user->remember_token}}">Verify Email angular server</a>
 
                 </div>
             </div>

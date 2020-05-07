@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTopicIdToJobDetailsTable extends Migration
+class AddTopicIdToClassDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddTopicIdToJobDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::table('job_details', function (Blueprint $table) {
+        Schema::table('class_details', function (Blueprint $table) {
             $table->unsignedBigInteger('topic_id')->after('user_id')->nullable();
 
             $table->foreign('topic_id')->references('id')
@@ -29,7 +29,7 @@ class AddTopicIdToJobDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('job_details', function (Blueprint $table) {
+        Schema::table('class_details', function (Blueprint $table) {
             $table->dropColumn('topic_id');
         });
     }

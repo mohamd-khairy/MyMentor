@@ -54,8 +54,8 @@ class ProfileController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "photo" => "nullable|image|mimes:jpeg,jpg,png|max:512",
-            'phone_number' => 'required|unique:profiles,id|min:10',
-            'mobile' => 'required|unique:profiles,id|min:10'
+            'phone_number' => 'nullable|unique:profiles,id|min:10',
+            'mobile' => 'nullable|unique:profiles,id|min:10'
         ]);
          
         if ($validator->fails()) {    
@@ -64,6 +64,17 @@ class ProfileController extends Controller
 
         $current_id = auth('api')->user()->id;
         $res = $this->putBy($request , ['user_id' => $current_id]);
+        
+        if($request->first_name){
+            $f = $request->first_name ?? auth('api')->user()->name;
+            $m= $request->middle_name ?? '';
+            $l= $request->last_name ?? '';
+
+            $user =auth('api')->user();
+            $user->name = $f.' '.$m.' '.$l;
+            $user->save();
+        }
+        
         $this->set_complete_profile_rate();
         return $res;
 

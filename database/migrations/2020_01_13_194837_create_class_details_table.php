@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobDetailsTable extends Migration
+class CreateClassDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateJobDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('job_details', function (Blueprint $table) {
+        Schema::create('class_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->text('available_days')->nullable(); //array
@@ -34,6 +34,6 @@ class CreateJobDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_details');
+        Schema::dropIfExists('class_details');
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Traits\UserTrait;
 use App\Http\Controllers\Traits\RestApi;
 use App\Mail\EmailVerify;
 use App\Models\Profile;
+use App\Models\UserType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -27,7 +28,7 @@ class UserController extends Controller
 
     public function most_popular_mentor()
     {
-      $data = User::with('profile','topics')->where(['user_type_id' => 1])->orderBy('complete_profile_rate' , 'desc')->take(5)->get() ?? [];
+      $data = User::with('profile','topics','skills' , 'experienceDetail' , 'job')->where( 'complete_profile_rate' ,'>=', 90)->where(['user_type_id' => UserType::where('user_type_name' , 'mentor')->first()->id])->orderBy('complete_profile_rate' , 'desc')->take(5)->get() ?? [];
 
       return responseSuccess($data , 'data returned successfully');
     }
