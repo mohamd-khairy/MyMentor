@@ -22,6 +22,8 @@ class JobDetailsController extends Controller
     {
         $data = JobDetails::create($request->all());
 
+        $this->set_complete_profile_rate();
+
         if (empty($data)) {
             return responseFail("data is empty");
         }
