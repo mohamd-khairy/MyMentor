@@ -63,6 +63,11 @@ class User extends VUSER implements JWTSubject
         return $this->hasMany(Rate::class , 'user_add_rate_id');
     }
 
+    public function job()
+    {
+        return $this->hasMany(JobDetails::class , 'user_id')->latest();
+    }
+
     public function jobs()
     {
         return $this->hasMany(JobDetails::class , 'user_id');
