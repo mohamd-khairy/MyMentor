@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Http\Controllers\Traits\UserTrait;
 use App\Models\JobDetails;
 
 class JobDetailsController extends Controller
