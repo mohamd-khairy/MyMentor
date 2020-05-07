@@ -57,7 +57,7 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             "photo" => "nullable|image|mimes:jpeg,jpg,png|max:512",
             'phone_number' => 'nullable|unique:profiles,user_id,'.$current_id.'|min:10',
-            'mobile' => 'nullable|unique:profiles,user_id'.$current_id.'|min:10'
+            'mobile' => 'nullable|unique:profiles,user_id,'.$current_id.'|min:10'
         ]);
          
         if ($validator->fails()) {    
