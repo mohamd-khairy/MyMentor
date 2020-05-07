@@ -133,7 +133,9 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return responseSuccess(auth('api')->user() , 'user data returned successfully');
+        $data = auth('api')->user();
+        $data['profile'] = auth('api')->user()->profile;
+        return responseSuccess($data , 'user data returned successfully');
 
     }
 
