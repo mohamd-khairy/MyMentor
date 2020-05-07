@@ -65,7 +65,7 @@ class User extends VUSER implements JWTSubject
 
     public function job()
     {
-        return $this->hasMany(JobDetails::class , 'user_id')->latest();
+        return $this->hasOne(JobDetails::class , 'user_id')->latest();
     }
 
     public function jobs()
@@ -97,6 +97,17 @@ class User extends VUSER implements JWTSubject
     {
         return $this->hasMany(ExperienceDetails::class , 'user_id');
     }
+
+    public function classDetail()
+    {
+        return $this->hasOne(ClassDetails::class , 'user_id')->latest();
+    }
+    
+    public function classDetails()
+    {
+        return $this->hasMany(ClassDetails::class , 'user_id');
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
