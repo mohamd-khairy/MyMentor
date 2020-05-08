@@ -110,8 +110,8 @@ trait RestApi
             $all_data['photo'] = 'images/users/profile/'.$imageName;
         }
 
-        return $data->update($all_data);
 
+        $data->update($all_data);
 
         return responseSuccess($data , "data updated successfully");
     }

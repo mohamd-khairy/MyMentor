@@ -64,7 +64,7 @@ class ProfileController extends Controller
             return response()->json($validator->messages(), 400);
         }
 
-        return $res = $this->putBy($request , ['user_id' => $current_id]);
+        $res = $this->putBy($request , ['user_id' => $current_id]);
         
         if($request->first_name){
             $f = $request->first_name ?? auth('api')->user()->name;

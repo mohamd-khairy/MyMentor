@@ -71,7 +71,7 @@ class Profile extends Model
         $url = $_SERVER['HTTP_HOST'] == 'localhost:8000' ? 'http://localhost:8000' : config('app.host_url');
         $file = $url.'/'.$this->attributes['photo'];
 
-        if(isset($this->attributes['photo']) && file_exists($file)){
+        if(isset($this->attributes['photo']) && file_exists($this->attributes['photo'])){
             return $file;//$this->attributes['photo'];
         }else{
           return "https://img.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg?size=338&ext=jpg";
