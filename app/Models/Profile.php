@@ -84,4 +84,11 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class , 'user_id');
     }
+
+    
+    public function getDateOfBirthAttribute()
+    {
+        return $this->attributes['date_of_birth'] ?  date('Y-m-d' , strtotime($this->attributes['date_of_birth'])) : null;
+    }
+
 }

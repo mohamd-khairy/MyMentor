@@ -48,11 +48,11 @@ class ExperienceDetails extends Model
 
     public function getStartDateAttribute()
     {
-        return date('Y-m-d' , strtotime($this->attributes['start_date']));
+        return $this->attributes['start_date'] ?  date('Y-m-d' , strtotime($this->attributes['start_date'])) : null;
     }
 
     public function getEndDateAttribute()
     {
-        return date('Y-m-d' , strtotime($this->attributes['end_date']));
+        return $this->attributes['end_date'] ? date('Y-m-d' , strtotime($this->attributes['end_date'])) : null;
     }
 }
