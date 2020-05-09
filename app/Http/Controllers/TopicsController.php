@@ -25,7 +25,7 @@ class TopicsController extends Controller
         // $result = Topics::search($searchText)->paginate(20);
         // return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
 
-        $result = Topics::query()->scopeSearch($searchText)->get();
+        $result = Topics::orderby('id' , 'desc')->scopeSearch($searchText)->get();
         return \responseSuccess($result);
     }
 }
