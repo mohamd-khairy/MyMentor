@@ -25,15 +25,13 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.skill_name as name')
+        $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.skill_name as name')
                     ->leftJoin('skill_details', 'skill_details.user_id', '=', 'users.id')
                     ->where('skill_details.skill_name', 'like', '%'.$searchText.'%')
                     ->get();
 
         // $result = Topics::search($searchText)->paginate(20);
-        // return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
 
-        // $result = Topics::orderby('id' , 'desc')->scopeSearch($searchText)->get();
         return \responseSuccess($result);
     }
 }
