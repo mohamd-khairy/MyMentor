@@ -26,7 +26,7 @@ class TopicsController extends Controller
 
 
         $result = User::select('user.*' , 'skills.skill_name')->leftJoin('skills', 'skills.user_id', '=', 'user.id')
-        ->where('skills.skill_name', $searchText)
+        ->where('skills.skill_name', 'like', '%'.$searchText.'%')
         ->get();
 
         // $result = Topics::search($searchText)->paginate(20);
