@@ -40,12 +40,12 @@ class Topics extends Model
     protected $with = ['user' , 'category' , 'language'];
     
 
-    // public static function scopeSearch($query, $q)
-    // {
-    //     return $query->where('topic', 'like', '%' .$q. '%')
-    //                 ->orWhere('subject', 'like', '%' .$q. '%')
-    //                 ->orWhere('details', 'like', '%' .$q. '%');
-    // }
+    public static function scopeSearch($query, $q)
+    {
+        return $query->where('topic', 'like', '%' .$q. '%')
+                    ->orWhere('subject', 'like', '%' .$q. '%')
+                    ->orWhere('details', 'like', '%' .$q. '%');
+    }
 
   
     /** attach loged in user id with profile data */
