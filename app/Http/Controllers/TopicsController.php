@@ -23,9 +23,9 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
         // $result = Topics::search($searchText)->paginate(20);
-        return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
+        // return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
 
-        // $result = Topics::scopeSearch($searchText)->get();
+        $result = Topics::quert()->scopeSearch($searchText)->get();
         return \responseSuccess($result);
     }
 }
