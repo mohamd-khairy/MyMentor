@@ -25,7 +25,7 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.id as ids' , 'skill_details.*')
+        $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.skill_name')
                     ->leftJoin('skill_details', 'skill_details.user_id', '=', 'users.id')
                     ->where('skill_details.skill_name', 'like', '%'.$searchText.'%')
                     ->get();
