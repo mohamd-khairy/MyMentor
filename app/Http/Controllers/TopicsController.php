@@ -25,10 +25,10 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')//->select('users.*' , 'skill_details.skill_name')
+        $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.skill_name')
                     ->join('skill_details', 'skill_details.user_id', '=', 'users.id')
                     ->where('skill_details.skill_name', 'like', '%'.$searchText.'%')
-                    ->groupBy('users.id')
+                    ->groupBy('users.id'.'skill_details.skill_name')
                     ->get();
 
         // $result = Topics::search($searchText)->paginate(20);
