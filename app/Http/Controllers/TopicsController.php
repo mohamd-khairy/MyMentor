@@ -25,7 +25,7 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::select('user.id as ids' , 'skills.skill_name as name')->leftJoin('skills', 'skills.user_id', '=', 'user.id')
+        $result = User::select('user.id as ids' , 'skills.skill_name as name')->leftJoin('skill_details as skills', 'skills.user_id', '=', 'user.id')
         ->where('skills.skill_name', 'like', '%'.$searchText.'%')
         ->get();
 
