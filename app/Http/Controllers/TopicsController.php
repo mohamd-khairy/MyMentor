@@ -29,7 +29,7 @@ class TopicsController extends Controller
                     ->join('skill_details', 'skill_details.user_id', '=', 'users.id')
                     ->where('skill_details.skill_name', 'like', '%'.$searchText.'%')
                     ->groupBy('users.id','skill_details.user_id')
-                    ->get();
+                    ->paginate(5);
 
         // $result = Topics::search($searchText)->paginate(20);
 
