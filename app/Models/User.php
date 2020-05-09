@@ -63,9 +63,19 @@ class User extends VUSER implements JWTSubject
         return $this->hasMany(Rate::class , 'user_add_rate_id');
     }
 
+    public function job()
+    {
+        return $this->hasOne(JobDetails::class , 'user_id')->latest();
+    }
+
     public function jobs()
     {
         return $this->hasMany(JobDetails::class , 'user_id');
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(SkillDetails::class , 'user_id');
     }
 
     public function topics()
@@ -76,6 +86,26 @@ class User extends VUSER implements JWTSubject
     public function topicss()
     {
         return $this->hasMany(Topics::class , 'user_id');
+    }
+
+    public function experienceDetail()
+    {
+        return $this->hasOne(ExperienceDetails::class , 'user_id')->latest();
+    }
+    
+    public function experienceDetails()
+    {
+        return $this->hasMany(ExperienceDetails::class , 'user_id');
+    }
+
+    public function classDetail()
+    {
+        return $this->hasOne(ClassDetails::class , 'user_id')->latest();
+    }
+    
+    public function classDetails()
+    {
+        return $this->hasMany(ClassDetails::class , 'user_id');
     }
 
     /**

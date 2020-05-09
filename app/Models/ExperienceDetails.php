@@ -44,4 +44,15 @@ class ExperienceDetails extends Model
     {
         return $this->belongsTo(User::class , 'user_id');
     }
+
+
+    public function getStartDateAttribute()
+    {
+        return $this->attributes['start_date'] ?  date('Y-m-d' , strtotime($this->attributes['start_date'])) : null;
+    }
+
+    public function getEndDateAttribute()
+    {
+        return $this->attributes['end_date'] ? date('Y-m-d' , strtotime($this->attributes['end_date'])) : null;
+    }
 }

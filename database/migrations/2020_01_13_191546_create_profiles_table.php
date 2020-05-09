@@ -23,8 +23,8 @@ class CreateProfilesTable extends Migration
             $table->string('postal_code')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
-            $table->string('phone_number')->unique()->nullable();
-            $table->string('mobile')->unique()->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('mobile')->nullable();
             $table->timestamp('date_of_birth')->nullable();
             $table->string('gender')->nullable();
             $table->tinyInteger('marital_status')->nullable();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Http\Controllers\Traits\UserTrait;
 use App\Models\JobDetails;
 
 class JobDetailsController extends Controller
@@ -11,7 +12,7 @@ class JobDetailsController extends Controller
     const MODEL = JobDetails::class;
     const FILTERS = ['user_id' ];
 
-    use RestApi;
+    use RestApi , UserTrait;
 
     public function __construct()
     {
@@ -21,6 +22,8 @@ class JobDetailsController extends Controller
     public function store(Request $request)
     {
         $data = JobDetails::create($request->all());
+
+        $this->set_complete_profile_rate();
 
         if (empty($data)) {
             return responseFail("data is empty");

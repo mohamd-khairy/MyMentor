@@ -103,7 +103,7 @@ trait RestApi
         $all_data = $request->all();
 
         if($request->photo){
-            Storage::delete($data->photo);
+            // Storage::delete($data->photo);
             // $all_data['photo'] = $request->photo->store('/users/profile');
             $imageName = time().'.'. $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path('images/users/profile'), $imageName);
