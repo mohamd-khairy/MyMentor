@@ -25,9 +25,9 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::with('skills')->whereHas('skills', function (Builder $query) use ($searchText) {
-            $query->where('skill_name', 'like', $searchText);
-        })->get();
+        $result = User::select('user.*' , 'skills.skill_name')->leftJoin('skills', 'skills.user_id', '=', 'user.id')
+        ->where('skills.skill_name', $searchText)
+        ->get();
 
         // $result = Topics::search($searchText)->paginate(20);
         // return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
