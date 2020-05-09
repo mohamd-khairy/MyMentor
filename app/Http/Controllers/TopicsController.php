@@ -24,7 +24,7 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::whereHas('skills', function ($query) use ($searchText) {
+        $result = User::with('skills')->whereHas('skills', function ($query) use ($searchText) {
             $query->where('skill_name', 'like', $searchText);
         })->get();
 
