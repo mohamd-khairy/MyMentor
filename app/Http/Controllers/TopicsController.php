@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Models\Topics;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 
 class TopicsController extends Controller
 {
@@ -24,7 +25,7 @@ class TopicsController extends Controller
         $searchText = $request->q;
 
 
-        $result = User::with('skills')->whereHas('skills', function ($query) use ($searchText) {
+        $result = User::with('skills')->whereHas('skills', function (Builder $query) use ($searchText) {
             $query->where('skill_name', 'like', $searchText);
         })->get();
 
