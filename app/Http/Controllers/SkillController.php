@@ -32,7 +32,7 @@ class SkillController extends Controller
         $skills = explode(',' , $request->skill_name);
 
         $data = Collect($skills)->map(function($item){
-            return SkillDetails::updateOrCreate(['skill_name' => $item]);
+            return SkillDetails::updateOrCreate(['user_id' => auth('api')->user()->id ,'skill_name' => $item]);
         });
 
         if($data){

@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Http\Requests\SearchRequest;
 use App\Models\Topics;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
 
 class TopicsController extends Controller
 {
@@ -18,14 +22,19 @@ class TopicsController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
+        
         $searchText = $request->q;
 
-        $result = Topics::search($searchText)->paginate(20);
-        // return Topics::whereLike(['topic', 'subject', 'category.name', 'language.name'], $searchText)->get();
+        $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.user_id')
+                    ->join('skill_details', 'skill_details.user_id', '=', 'users.id')
+                    ->where('skill_details.skill_name', 'like', '%'.$searchText.'%')
+                    ->groupBy('users.id','skill_details.user_id')
+                    ->paginate(1);
 
-        // $result = Topics::search($searchText)->get();
+        // $result = Topics::search($searchText)->paginate(20);
+
         return \responseSuccess($result);
     }
 }

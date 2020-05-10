@@ -58,6 +58,11 @@ class User extends VUSER implements JWTSubject
         return $this->belongsTo(UserType::class , 'user_type_id');
     }
 
+    public function mentor()
+    {
+        return $this->belongsTo(UserType::class , 'user_type_id')->where('user_type_name' , 'mentor');
+    }
+
     public function rates()
     {
         return $this->hasMany(Rate::class , 'user_add_rate_id');
