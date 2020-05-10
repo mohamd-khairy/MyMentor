@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Http\Requests\SearchRequest;
 use App\Models\Topics;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,16 +22,8 @@ class TopicsController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'q' => 'required|string|max:100',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
-        }
         
         $searchText = $request->q;
 
