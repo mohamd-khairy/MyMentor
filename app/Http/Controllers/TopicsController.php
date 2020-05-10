@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\RestApi;
 use App\Models\Topics;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
 
 class TopicsController extends Controller
 {
@@ -22,14 +23,22 @@ class TopicsController extends Controller
 
     public function search(Request $request)
     {
-        $searchText = $request->q;
 
+        $validator = Validator::make($request->all(), [
+            'q' => 'required|string|max:100',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(),400);
+        }
+        
+        $searchText = $request->q;
 
         $result = User::setEagerLoads([])->with('mentor','profile','job' ,'skills')->select('users.*' , 'skill_details.user_id')
                     ->join('skill_details', 'skill_details.user_id', '=', 'users.id')
                     ->where('skill_details.skill_name', 'like', '%'.$searchText.'%')
                     ->groupBy('users.id','skill_details.user_id')
-                    ->paginate(5);
+                    ->paginate(1);
 
         // $result = Topics::search($searchText)->paginate(20);
 
