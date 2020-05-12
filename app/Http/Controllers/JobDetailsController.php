@@ -19,6 +19,15 @@ class JobDetailsController extends Controller
         $this->middleware('auth:api');
     }
     
+    public function index(Request $request)
+    {
+        $conditions = $this->filter($request);
+        if(is_array($conditions))
+            return $this->findBy($conditions);
+        else
+            return $this->filter($request);
+    }
+
     public function store(Request $request)
     {
         $data = JobDetails::create($request->all());
