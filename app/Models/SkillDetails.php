@@ -8,7 +8,7 @@ class SkillDetails extends Model
 {
     protected $table = 'skill_details';
 
-    protected $fillable = ['skill_name' , 'user_id'];
+    protected $fillable = ['skill_name' , 'user_id' , 'experience_years' , 'details' , 'photo'];
 
     protected $hidden = ['created_at' , 'updated_at'];
 

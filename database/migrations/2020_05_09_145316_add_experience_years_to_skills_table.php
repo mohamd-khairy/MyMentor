@@ -14,8 +14,9 @@ class AddExperienceYearsToSkillsTable extends Migration
     public function up()
     {
         Schema::table('skill_details', function (Blueprint $table) {
-            $table->string('experience_years')->nullable();
-            $table->string('details')->nullable();
+            $table->string('experience_years')->after('skill_name')->nullable();
+            $table->string('details')->after('skill_name')->nullable();
+            $table->string('photo')->after('skill_name')->nullable();
         });
     }
 

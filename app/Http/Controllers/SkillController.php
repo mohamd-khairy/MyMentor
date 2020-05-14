@@ -29,11 +29,17 @@ class SkillController extends Controller
             return response()->json($validator->messages(), 400);
         }
 
-        $skills = explode(',' , $request->skill_name);
+        // $skills = explode(',' , $request->skill_name);
 
-        $data = Collect($skills)->map(function($item){
-            return SkillDetails::updateOrCreate(['user_id' => auth('api')->user()->id ,'skill_name' => $item]);
-        });
+        // $data = Collect($skills)->map(function($item) use($request){
+        //     return SkillDetails::updateOrCreate([
+        //         'user_id' => auth('api')->user()->id ,
+        //         'skill_name' => $item,
+        //         'experience_years' => $request->experience_years,
+        //         'details' => $request->details
+        //     ]);
+        // });
+        $data = $this->putBy($request , ['user_id' => auth('api')->user()->id]);
 
         if($data){
             return responseSuccess($data , 'data saved successfully');

@@ -103,11 +103,16 @@ trait RestApi
         $all_data = $request->all();
 
         if($request->photo){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
             // Storage::delete($data->photo);
             // $all_data['photo'] = $request->photo->store('/users/profile');
             $imageName = time().'.'. $request->photo->getClientOriginalExtension();
-            $request->photo->move(public_path('images/users/profile'), $imageName);
-            $all_data['photo'] = 'images/users/profile/'.$imageName;
+            $request->photo->move(public_path($file), $imageName);
+            $all_data['photo'] = $file.'/'.$imageName;
         }
 
 
