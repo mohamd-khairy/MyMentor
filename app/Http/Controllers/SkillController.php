@@ -19,15 +19,15 @@ class SkillController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            "skill_name" => "required|string"
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         "skill_name" => "required|string"
+    //     ]);
          
-        if ($validator->fails()) {    
-            return response()->json($validator->messages(), 400);
-        }
+    //     if ($validator->fails()) {    
+    //         return response()->json($validator->messages(), 400);
+    //     }
 
         // $skills = explode(',' , $request->skill_name);
 
@@ -39,12 +39,8 @@ class SkillController extends Controller
         //         'details' => $request->details
         //     ]);
         // });
-        $data = $this->putBy($request , ['user_id' => auth('api')->user()->id]);
+        // return $data = $this->add($request);
 
-        if($data){
-            return responseSuccess($data , 'data saved successfully');
-        }
-        return responseFail('some thing wrong');
-    }
+    // }
     
 }

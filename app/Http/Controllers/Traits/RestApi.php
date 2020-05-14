@@ -47,11 +47,21 @@ trait RestApi
     public function add($request)
     {
         $model = self::MODEL;
-        $data = $model::firstOrCreate($request->all());
-
-        if (empty($data)) {
-            return responseFail("data is empty");
+        $data = $request->all();
+        
+        if($request->photo){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path($file), $imageName);
+            $data['photo'] = $file.'/'.$imageName;
         }
+
+        $data = $model::firstOrCreate($data);
+
         return responseSuccess($data , "data added successfully");
     }
 
