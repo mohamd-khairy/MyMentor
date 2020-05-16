@@ -9,7 +9,7 @@ trait RestApi
     public function get($conditions = null)
     {
         $model = self::MODEL;
-        $data = $model::where($conditions)->get();
+        $data = $model::where($conditions)->paginate(10);
 
         if (empty($data)) {
             return responseFail("data is empty");
