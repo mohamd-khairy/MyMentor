@@ -34,11 +34,16 @@ class Rate extends Model
     
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class , 'user_id')->with('profile:id,photo');
     }
 
     public function user_rated()
     {
-        return $this->belongsTo(User::class , 'user_rated_id')->with('profile');
+        return $this->belongsTo(User::class , 'user_rated_id')->with('profile:id,photo');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return $this->attributes['created_at'] ?  date('d M Y' , strtotime($this->attributes['created_at'])) : null;
     }
 }
