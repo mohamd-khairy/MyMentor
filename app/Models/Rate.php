@@ -34,7 +34,7 @@ class Rate extends Model
     
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id')->with('profile:id,photo');
+        return $this->belongsTo(User::class , 'user_id')->with('profile:id');
     }
 
     public function user_rated()
