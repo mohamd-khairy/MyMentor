@@ -9,7 +9,7 @@ class Rate extends Model
 {
     protected $fillable = ['rate' , 'comment' , 'user_rated_id' , 'user_id'];
 
-    protected $hidden = ['created_at' , 'updated_at'];
+    protected $hidden = ['updated_at'];
 
     protected $with = ['user' , 'user_rated'];
     
@@ -39,6 +39,6 @@ class Rate extends Model
 
     public function user_rated()
     {
-        return $this->belongsTo(User::class , 'user_rated_id');
+        return $this->belongsTo(User::class , 'user_rated_id')->with('profile');
     }
 }
