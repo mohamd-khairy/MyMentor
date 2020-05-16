@@ -11,7 +11,7 @@ class Rate extends Model
 
     protected $hidden = ['created_at' , 'updated_at'];
 
-    protected $with = ['user' , 'user_add_rate'];
+    protected $with = ['user' , 'user_rated'];
     
     /** attach loged in user id with profile data */
     public static function boot()
@@ -37,8 +37,8 @@ class Rate extends Model
         return $this->belongsTo(User::class , 'user_id');
     }
 
-    public function user_add_rate()
+    public function user_rated()
     {
-        return $this->belongsTo(User::class , 'user_rated_id');
+        return $this->belongsTo(User::class , 'user_id');
     }
 }
