@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model
 {
-    protected $fillable = ['rate' , 'comment' , 'user_add_rate_id' , 'user_id'];
+    protected $fillable = ['rate' , 'comment' , 'user_rated_id' , 'user_id'];
 
     protected $hidden = ['created_at' , 'updated_at'];
 
@@ -39,6 +39,6 @@ class Rate extends Model
 
     public function user_add_rate()
     {
-        return $this->belongsTo(User::class , 'user_add_rate_id');
+        return $this->belongsTo(User::class , 'user_rated_id');
     }
 }
