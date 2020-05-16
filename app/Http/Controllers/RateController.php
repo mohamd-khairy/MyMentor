@@ -22,8 +22,6 @@ class RateController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['user_id']= $data->user_rated_id;
-        $data['user_rated_id'] = auth('api')->user()->id;
         $data = Rate::firstOrCreate($data);
         $this->set_rate($data->user_rated_id);
         if (empty($data)) {
