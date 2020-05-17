@@ -18,6 +18,7 @@ class CreateExperienceDetailsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('company_name')->nullable();
             $table->string('job_title')->nullable();
+            $table->string('location')->nullable();
             $table->tinyInteger('present')->default(0);
             $table->text('details')->nullable();
 

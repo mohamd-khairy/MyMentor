@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExperienceDetails extends Model
 {
-    protected $fillable = ['company_name' , 'job_title' , 'present' ,
+    protected $fillable = ['company_name' , 'job_title' , 'present' , 'location' ,
         'details' , 'start_date' , 'end_date' , 'user_id'];
 
     protected $hidden = ['created_at' , 'updated_at'];
