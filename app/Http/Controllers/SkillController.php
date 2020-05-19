@@ -19,6 +19,27 @@ class SkillController extends Controller
         $this->middleware('auth:api');
     }
 
+
+    public function update_skill(Request $request, $id)
+    {
+        $row = SkillDetails::find($id);
+
+        if (empty($row)) {
+            return responseFail("data is empty");
+        }
+        $data = $request->all();
+
+        if($request->photo){
+            $file = 'images'; 
+            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path($file), $imageName);
+            $data['photo'] = $file.'/'.$imageName;
+        }
+
+        $row->update($data);
+
+        return responseSuccess($row , "data updated successfully");
+    }
     // public function store(Request $request)
     // {
     //     $validator = Validator::make($request->all(), [
