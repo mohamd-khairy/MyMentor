@@ -31,17 +31,27 @@ trait RestApi
     public function put($request, $id)
     {
         $model = self::MODEL;
-        $data = $model::find($id);
+        $row = $model::find($id);
 
-        if (empty($data)) {
+        if (empty($row)) {
             return responseFail("data is empty");
         }
-        $request = $request->all();
-        // $request['user_id'] = auth('api')->user()->id;
+        $data = $request->all();
 
-        $data->update($request);
+        if($request->photo){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path($file), $imageName);
+            $data['photo'] = $file.'/'.$imageName;
+        }
 
-        return responseSuccess($data , "data updated successfully");
+        $row->update($data);
+
+        return responseSuccess($row , "data updated successfully");
     }
 
     public function add($request)
