@@ -49,7 +49,6 @@ trait RestApi
             $data['photo'] = $file.'/'.$imageName;
         }
 
-        return $data;
         $row->update($data);
 
         return responseSuccess($row , "data updated successfully");
