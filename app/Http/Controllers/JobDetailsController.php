@@ -33,7 +33,12 @@ class JobDetailsController extends Controller
 
     public function store(Request $request)
     {
-        $data = JobDetails::create($request->all());
+        $old = JobDetails::where('user_id' , auth('api')->user()->id)->first();
+        if($old){
+            $data = JobDetails::update($request->all());
+        }else{
+            $data = JobDetails::create($request->all());
+        }
 
         $this->set_complete_profile_rate();
 
