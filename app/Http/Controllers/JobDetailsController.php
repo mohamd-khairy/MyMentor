@@ -22,10 +22,13 @@ class JobDetailsController extends Controller
     public function index(Request $request)
     {
         $conditions = $this->filter($request);
-        if(is_array($conditions))
-            return $this->findBy($conditions);
-        else
+
+        if(is_array($conditions)){
+            $data = JobDetails::where($conditions)->first();
+            return responseSuccess($data , "data returned successfully"); 
+        }else{
             return $this->filter($request);
+        }
     }
 
     public function store(Request $request)
