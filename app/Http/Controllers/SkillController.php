@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Models\SkillDetails;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class SkillController extends Controller
@@ -21,20 +20,6 @@ class SkillController extends Controller
     }
 
 
-    public function show($id)
-    {
-        $current_id = auth('api')->user()->id;
-        $data = User::find($id);
-
-        if($current_id != $data->id && $data->user_type->user_type_name != 'mentor'){
-            return responseFail("this id not belong to you !");
-        }
-        
-
-        return $this->find($id);
-
-    }
-    
     public function update_skill(Request $request, $id)
     {
         $row = SkillDetails::find($id);

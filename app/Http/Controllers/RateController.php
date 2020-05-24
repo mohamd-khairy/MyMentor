@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Http\Controllers\Traits\UserTrait;
 use App\Models\Rate;
-use App\Models\User;
 
 class RateController extends Controller
 {
@@ -29,19 +28,5 @@ class RateController extends Controller
             return responseSuccess([],"data is empty");
         }
         return responseSuccess($data , "data added successfully");
-    }
-
-    public function show($id)
-    {
-        $current_id = auth('api')->user()->id;
-        $data = User::find($id);
-
-        if($current_id != $data->id && $data->user_type->user_type_name != 'mentor'){
-            return responseFail("this id not belong to you !");
-        }
-        
-
-        return $this->find($id);
-
     }
 }
