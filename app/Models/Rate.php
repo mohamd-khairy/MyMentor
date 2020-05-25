@@ -13,7 +13,12 @@ class Rate extends Model
 
     protected $with = ['user' , 'user_rated'];
     
-   
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        // your other new column
+    ];
+    
     /** attach loged in user id with profile data */
     public static function boot()
     {
