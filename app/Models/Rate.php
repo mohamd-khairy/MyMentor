@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model
@@ -18,7 +19,7 @@ class Rate extends Model
         'updated_at',
         // your other new column
     ];
-    
+
     /** attach loged in user id with profile data */
     public static function boot()
     {
@@ -50,7 +51,7 @@ class Rate extends Model
 
     public function getCreatedAtAttribute()
     {
-        return $this->attributes['created_at'] ?   date('Y-m-d h:i:s A' , strtotime($this->attributes['created_at']))->diffForHumans() : null ;
+        return $this->attributes['created_at'] ?   Carbon::parse($this->attributes['created_at'])->diffForHumans() : null ;
         // date('d M Y' , strtotime($this->attributes['created_at'])) : null;
 
        
