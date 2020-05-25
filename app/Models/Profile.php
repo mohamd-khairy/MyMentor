@@ -16,6 +16,21 @@ class Profile extends Model
 
     protected $with = ['user'];
 
+    protected $appends = ['count'];
+
+
+    public function getCountAttribute()
+    {
+        
+        return $this->rates() ? $this->rates()->count() : 0;
+    }
+
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class , 'user_id' , 'user_id');
+    }
+
     /** attach loged in user id with profile data */
     public static function boot()
     {

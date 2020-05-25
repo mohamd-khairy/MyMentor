@@ -33,15 +33,7 @@ class User extends VUSER implements JWTSubject
 
     protected $with = ['user_type'];
 
-    protected $appends = ['count'];
-
-
-    public function getCountAttribute()
-    {
-        
-        return $this->rates() ? $this->rates()->count() : 0;
-    }
-
+  
 
 
     public function setPasswordAttribute($input)
