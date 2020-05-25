@@ -18,6 +18,7 @@ class Rate extends Model
 
     public function getCountAttribute()
     {
+        dd($this);
         return  count($this);
     }
     
