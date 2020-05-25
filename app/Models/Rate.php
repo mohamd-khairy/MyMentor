@@ -13,6 +13,15 @@ class Rate extends Model
 
     protected $with = ['user' , 'user_rated'];
     
+    protected $appends = ['count'];
+
+
+    public function getCountAttribute()
+    {
+        return  count($this);
+    }
+    
+
     /** attach loged in user id with profile data */
     public static function boot()
     {
