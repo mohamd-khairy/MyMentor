@@ -26,7 +26,7 @@ trait UserTrait
       $rate = 0 ;
 
       if($data){
-        $rate = $data->sum('rate')/count($data);
+        $rate = round($data->sum('rate')/count($data));
       }
 
       $user->update(['rate' => $rate]);
