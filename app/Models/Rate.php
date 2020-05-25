@@ -45,7 +45,7 @@ class Rate extends Model
 
     public function getCreatedAtAttribute()
     {
-        return $this->attributes['created_at'] ?  $this->attributes['created_at'] ->diffForHumans() : null ;
+        return $this->attributes['created_at'] ?   date('Y-m-d h:i:s A' , strtotime($this->attributes['created_at']))->diffForHumans() : null ;
         // date('d M Y' , strtotime($this->attributes['created_at'])) : null;
 
        
