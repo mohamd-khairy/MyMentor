@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Sessions extends Model
 {
@@ -19,6 +20,28 @@ class Sessions extends Model
     protected $casts = [ "accept" => "boolean"];
 
     /** mutators */
+
+    public function setDayIdsAttribute($input)
+    {
+        $this->attributes['day_ids'] =  json_encode($input);
+    }
+
+    public function getDayIdsAttribute($value) {
+        $days = json_decode($value, true);
+
+        $days_names = [];
+
+        if(!empty($days)){
+
+            $collection = new Collection($days);
+            
+            $days_names = $collection->map(function($item, $key) {
+                return WeekDays::where('id' , $item)->first()->day;
+            });
+        }
+
+        return $days_names;
+    }
 
     public function getDayAttribute()
     {
