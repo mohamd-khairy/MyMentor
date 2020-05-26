@@ -57,7 +57,7 @@ trait RestApi
     public function add($request)
     {
         $model = self::MODEL;
-        return $data = $request->all();
+        $data = $request->all();
         
         if($request->photo){
             if((string) $model == 'Profile'){
@@ -70,7 +70,7 @@ trait RestApi
             $data['photo'] = $file.'/'.$imageName;
         }
 
-        $data = $model::firstOrCreate($data);
+        $data = $model::create($data);//firstOrCreate
 
         return responseSuccess($data , "data added successfully");
     }
