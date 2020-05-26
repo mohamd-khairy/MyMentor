@@ -57,7 +57,7 @@ trait RestApi
     public function add($request)
     {
         $model = self::MODEL;
-        $data = $request->all();
+        return $data = $request->all();
         
         if($request->photo){
             if((string) $model == 'Profile'){
