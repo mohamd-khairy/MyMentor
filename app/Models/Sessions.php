@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 
 class Sessions extends Model
 {
-    protected $fillable = ['title' , 'day_ids' , 'details' , 'duration' , 'day_id' ,
+    protected $fillable = ['title' , 'day_ids' , 'details' , 'duration' , 'day_id' , 'repository_url' ,
      'user_give_id' , 'user_recieve_id' ,'topic_id','accept','session_type'];
 
     protected $hidden = ['created_at' , 'updated_at'];
