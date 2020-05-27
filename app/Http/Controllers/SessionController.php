@@ -43,7 +43,7 @@ class SessionController extends Controller
         //must be mentor
         
         $validator = Validator::make($request->all(), [
-            'accept' => 'required'
+            'status' => 'required'
         ]);
         
         if ($validator->fails()) {    
