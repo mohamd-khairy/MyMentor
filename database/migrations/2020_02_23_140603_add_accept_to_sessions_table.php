@@ -14,7 +14,8 @@ class AddAcceptToSessionsTable extends Migration
     public function up()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->boolean('accept')->after('details')->default(false);
+            $table->enum('status', ['pending','accept','reject'])->default('pending');	
+
         });
     }
 
