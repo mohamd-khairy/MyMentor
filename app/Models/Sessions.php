@@ -11,7 +11,7 @@ class Sessions extends Model
     protected $fillable = ['title' , 'day_ids' , 'details' , 'duration' , 'day_id' , 'repository_url' ,
      'user_give_id' , 'user_recieve_id' ,'topic_id','accept','session_type'];
 
-    protected $hidden = ['created_at' , 'updated_at'];
+    protected $hidden = ['updated_at'];
 
     protected $with = ['user_give' , 'user_recieve' , 'topic'];
 
@@ -68,5 +68,10 @@ class Sessions extends Model
     public function topic()
     {
         return $this->belongsTo(Topics::class , 'topic_id');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return $this->attributes['created_at'] ? 'Created On '.date('d M, Y' , strtotime($this->attributes['created_at'])) : null;
     }
 }
