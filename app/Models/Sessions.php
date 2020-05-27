@@ -62,7 +62,7 @@ class Sessions extends Model
 
     public function user_recieve()
     {
-        return $this->belongsTo(User::class , 'user_recieve_id');
+        return $this->belongsTo(User::class , 'user_recieve_id')->with('profile');
     }
 
     public function topic()
