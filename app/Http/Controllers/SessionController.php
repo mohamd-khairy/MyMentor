@@ -52,11 +52,9 @@ class SessionController extends Controller
 
         $session = Sessions::find($session_id);
 
-        $accept = (int) $request->accept == 1 ||  (string) $request->accept == "true"? 1: 0;
-
         if($session){
 
-            $session->update(['accept' => (boolean) $accept]);
+            $session->update(['status' => $request->status]);
 
             return responseSuccess($session , 'session changed successfully');
 
