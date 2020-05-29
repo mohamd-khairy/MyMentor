@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Models\SessionDays;
 use App\Models\Sessions;
+use App\Models\WeekDays;
 use Illuminate\Support\Facades\Validator;
 
 class SessionController extends Controller
@@ -39,17 +40,17 @@ class SessionController extends Controller
 
         $data = Sessions::create($data);//firstOrCreate
 
-        $days = [];
         foreach($request->dateTime as $day => $item){
-            array_push($days , [
+
+            SessionDays::create([
                 'session_id' => $data->id,
-                'day_id' => 1 ,
+                'day_id' => WeekDays::days[$day] ,
                 'date_time' => $item ,
                 'time' => ''
             ]);
+
         }
 
-        $data->sessionDays()->sync($days);
         return responseSuccess($data , "data added successfully");
     }
 
