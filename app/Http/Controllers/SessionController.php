@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Models\SessionDays;
 use App\Models\Sessions;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,8 +34,14 @@ class SessionController extends Controller
             return responseFail('user receive id must be user type');
         }
 
-        return $this->add($request);  
+        $data = $request->all();
+        
 
+        $data = Sessions::create($data);//firstOrCreate
+
+        
+        $data->sessionDays()->sync($request->dateTime);
+        return responseSuccess($data , "data added successfully");
     }
 
     public function acceptOrReject(Request $request , $session_id)
