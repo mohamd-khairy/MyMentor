@@ -46,7 +46,7 @@ class SessionController extends Controller
                 'session_id' => $data->id,
                 'day_id' => WeekDays::days[$day] ,
                 'date_time' => $item ,
-                'time' => ''
+                'time' => null
             ]);
 
         }
