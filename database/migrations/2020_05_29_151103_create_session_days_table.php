@@ -16,7 +16,7 @@ class CreateSessionDaysTable extends Migration
         Schema::create('session_days', function (Blueprint $table) {
             $table->bigIncrements('id'); 
             $table->unsignedBigInteger('session_id')->index()->nullable();
-            $table->unsignedBigInteger('week_days_id ')->index()->nullable();
+            $table->unsignedBigInteger('week_days_id')->index()->nullable();
             $table->dateTime('date_time')->nullable();
             $table->timestamps();
 
