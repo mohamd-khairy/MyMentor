@@ -44,9 +44,8 @@ class SessionController extends Controller
 
             SessionDays::create([
                 'session_id' => $data->id,
-                'day_id' => WeekDays::days[$day] ,
+                'week_days_id ' => WeekDays::days[$day] ,
                 'date_time' => $item ,
-                'time' => null
             ]);
 
         }

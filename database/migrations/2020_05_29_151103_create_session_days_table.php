@@ -16,16 +16,15 @@ class CreateSessionDaysTable extends Migration
         Schema::create('session_days', function (Blueprint $table) {
             $table->bigIncrements('id'); 
             $table->unsignedBigInteger('session_id')->index()->nullable();
-            $table->unsignedBigInteger('day_id')->index()->nullable();
+            $table->unsignedBigInteger('week_days_id ')->index()->nullable();
             $table->dateTime('date_time')->nullable();
-            $table->time('time')->nullable();
             $table->timestamps();
 
                
             $table->foreign('session_id')->references('id')
             ->on('sessions')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('day_id')->references('id')
+            $table->foreign('week_days_id')->references('id')
             ->on('week_days')->onUpdate('cascade')->onDelete('cascade');
         });
     }
