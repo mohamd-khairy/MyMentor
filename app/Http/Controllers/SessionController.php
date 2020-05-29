@@ -39,8 +39,17 @@ class SessionController extends Controller
 
         $data = Sessions::create($data);//firstOrCreate
 
-        
-        $data->sessionDays()->sync($request->dateTime);
+        $days = [];
+        foreach($request->dateTime as $day => $item){
+            array_push($days , [
+                'session_id' => $data->id,
+                'day_id' => 1 ,
+                'date_time' => $item ,
+                'time' => ''
+            ]);
+        }
+
+        $data->sessionDays()->sync($days);
         return responseSuccess($data , "data added successfully");
     }
 
