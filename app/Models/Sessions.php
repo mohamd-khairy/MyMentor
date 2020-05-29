@@ -71,7 +71,7 @@ class Sessions extends Model
     
     public function sessionDays()
     {
-        return $this->belongsToMany(WeekDays::class , 'session_days' , 'day_id')->withPivot('date_time');
+        return $this->belongsToMany(WeekDays::class , 'session_days' , 'day_id' , 'week_days_id ')->withPivot('date_time');
     }
 
     public function getCreatedAtAttribute()
