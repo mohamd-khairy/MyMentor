@@ -13,7 +13,7 @@ class Sessions extends Model
 
     protected $hidden = ['updated_at'];
 
-    protected $with = ['user_give' , 'user_recieve' , 'topic'];
+    protected $with = ['user_give' , 'user_recieve' , 'topic' ,'sessionDays'];
 
     protected $appends = ['day'];
 
@@ -71,7 +71,7 @@ class Sessions extends Model
     
     public function sessionDays()
     {
-        return $this->belongsToMany(WeekDays::class , 'session_days')->withPivot('date_time', 'time');
+        return $this->belongsToMany(WeekDays::class , 'session_days' , 'day_id')->withPivot('date_time');
     }
 
     public function getCreatedAtAttribute()
