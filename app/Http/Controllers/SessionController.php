@@ -144,7 +144,7 @@ class SessionController extends Controller
         $sign = $request->status == 'upcoming' ? '>=' : '<';
 
         $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id , $colum , $sign){
-            $q->where($colum , $id)->where('session_type' , '!=' , 'code review');
+            $q->where($colum , $id)->where('session_type' , '!=' , 'code review')->where('status' , '!=' , 'pending');
         })->whereDate('date_time' , $sign , Carbon::now())->get();
 
         return responseSuccess($data , 'data returned successfully');
