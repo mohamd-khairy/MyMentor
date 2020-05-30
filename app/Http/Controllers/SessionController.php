@@ -78,4 +78,11 @@ class SessionController extends Controller
             return responseFail('this session not found');
 
     }
+
+    public function schedule_sessions($id)
+    {
+        $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id){
+            $q->where('user_give_id' , $id);
+        })->get();
+    }
 }
