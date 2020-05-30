@@ -15,8 +15,6 @@ class SessionDays extends Model
     protected $hidden = [ 'created_at' ,'updated_at'];
 
     protected $dates = [
-        'created_at',
-        'updated_at',
         'date_time'
     ];
 
@@ -28,9 +26,9 @@ class SessionDays extends Model
 
     public function getDateTimeAttribute()
     {
-        //return $this->attributes['date_time'] ?  Carbon::parse($this->attributes['date_time'])->diffForHumans() : null ;
+        return $this->attributes['date_time'] ?  Carbon::parse($this->attributes['date_time'])->diffForHumans() : null ;
 
-         return $this->attributes['date_time'] ? date('d M, Y h:i A' , strtotime($this->attributes['date_time'])) : null;
+        // return $this->attributes['date_time'] ? date('d M, Y h:i A' , strtotime($this->attributes['date_time'])) : null;
     }
 
     /** relations */
