@@ -50,7 +50,7 @@ Route::group([
     Route::get('search' , 'TopicsController@search'); // done
 
     Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');//done
-    Route::get('schedule_session/{id}' , 'SessionController@schedule_sessions'); // done
+    Route::get('schedule_session' , 'SessionController@schedule_sessions'); // done
 
     Route::get('most_popular_mentor', 'UserController@most_popular_mentor'); //done
 
