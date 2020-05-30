@@ -14,9 +14,9 @@ class SessionDays extends Model
 
     protected $hidden = [ 'created_at' ,'updated_at'];
 
-    protected $dates = [
-        'date_time'
-    ];
+    // protected $dates = [
+    //     'date_time'
+    // ];
 
     public function getDayAttribute()
     {
