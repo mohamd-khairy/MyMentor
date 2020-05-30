@@ -82,9 +82,11 @@ class SessionController extends Controller
     public function schedule_sessions()
     {
         $id = auth('api')->user()->id;
-        
+
         $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id){
             $q->where('user_give_id' , $id);
         })->get();
+
+        return responseSuccess($data , 'data returned successfully')
     }
 }
