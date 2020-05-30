@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\RestApi;
 use App\Models\SessionDays;
 use App\Models\Sessions;
 use App\Models\WeekDays;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class SessionController extends Controller
@@ -82,10 +83,12 @@ class SessionController extends Controller
     public function schedule_sessions()
     {
         $id = auth('api')->user()->id;
-        return auth('api')->user();
-        $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id){
-            $q->where('user_give_id' , $id);
-        })->get();
+        $type = auth('api')->user()->user_type->user_type_name;
+        $colum = $type == 'mentor'? 'user_give_id' : 'user_recieve_id';
+
+        $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id , $colum){
+            $q->where($colum , $id);
+        })->whereDate('date_time' , '>=' , Carbon::now())->get();
 
         return responseSuccess($data , 'data returned successfully');
     }
