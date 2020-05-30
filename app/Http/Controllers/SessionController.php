@@ -98,15 +98,22 @@ class SessionController extends Controller
         if($session){
 
             if($session->session_type == 'code review'){
+                $status = $request->status;
                 if($request->status == 'accept'){
                     $codeReview_status = 'inProgress';
                 }else if($request->status == 'reject'){
                     $codeReview_status = 'canceled'; 
+                }else if($request->status == 'completed'){
+                    $codeReview_status = 'completed'; 
+                    $status = 'accept';
+                }else if($request->status == 'inProgress'){
+                    $codeReview_status = 'inProgress'; 
+                    $status = 'accept';
                 }else{
                     $codeReview_status = 'null'; 
                 }
                 
-                $session->update(['status' => $request->status , 'codeReview_status' => $codeReview_status]);
+                $session->update(['status' => $status , 'codeReview_status' => $codeReview_status]);
 
             }else{
                 $session->update(['status' => $request->status]);
