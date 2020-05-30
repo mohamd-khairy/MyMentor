@@ -17,6 +17,11 @@ class SessionDays extends Model
     }
 
 
+    public function getDateTimeAttribute()
+    {
+        return $this->attributes['date_time'] ? 'Started At '.date('d M, Y h:i A' , strtotime($this->attributes['date_time'])) : null;
+    }
+
     /** relations */
     public function session()
     {
