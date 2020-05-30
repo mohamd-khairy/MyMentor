@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class SessionController extends Controller
 {
     const MODEL = Sessions::class;
-    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id' , 'status' , 'session_type'];
+    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id' , 'status' , 'session_type' , 'codeReview_status'];
 
     use RestApi;
 
