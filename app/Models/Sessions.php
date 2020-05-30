@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 class Sessions extends Model
 {
     protected $fillable = ['title' , 'day_ids' , 'details' , 'duration' , 'day_id' , 'repository_url' ,
-     'user_give_id' , 'user_recieve_id' ,'topic_id','status','session_type'];
+     'user_give_id' , 'user_recieve_id' ,'topic_id','status', 'codeReview_status' ,'session_type'];
 
     protected $hidden = ['updated_at'];
 
