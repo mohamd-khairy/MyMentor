@@ -74,11 +74,11 @@ class Sessions extends Model
 
     public function getCreatedAtAttribute()
     {
-        return $this->attributes['created_at'] ? 'Created On '.date('d M, Y' , strtotime($this->attributes['created_at'])) : null;
+        return $this->attributes['created_at'] ? 'Created On '.date('d M, Y - h:i A' , strtotime($this->attributes['created_at'])) : null;
     }
 
     public function getUpdatedAtAttribute()
     {
-        return $this->attributes['updated_at'] ? date('d M, Y' , strtotime($this->attributes['updated_at'])) : null;
+        return $this->attributes['updated_at'] ? date('d M, Y - h:i A' , strtotime($this->attributes['updated_at'])) : null;
     }
 }
