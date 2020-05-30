@@ -24,12 +24,12 @@ class SessionDays extends Model
     }
 
 
-    public function getDateTimeAttribute()
-    {
-        return $this->attributes['date_time'] ?  Carbon::parse($this->attributes['date_time'])->diffForHumans() : null ;
+    // public function getDateTimeAttribute()
+    // {
+    //     return $this->attributes['date_time'] ?  Carbon::parse($this->attributes['date_time'])->diffForHumans() : null ;
 
-        // return $this->attributes['date_time'] ? date('d M, Y h:i A' , strtotime($this->attributes['date_time'])) : null;
-    }
+    //     // return $this->attributes['date_time'] ? date('d M, Y h:i A' , strtotime($this->attributes['date_time'])) : null;
+    // }
 
     /** relations */
     public function session()
