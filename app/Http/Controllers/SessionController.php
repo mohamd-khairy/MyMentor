@@ -67,7 +67,7 @@ class SessionController extends Controller
 
         $data = Sessions::create($data);//firstOrCreate
 
-        foreach($request->dateTime as $day => $item){
+        foreach($request->dateTime->toArray() as $day => $item){
 
             SessionDays::create([
                 'session_id' => $data->id,
