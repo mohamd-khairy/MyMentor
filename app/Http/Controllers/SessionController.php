@@ -87,6 +87,6 @@ class SessionController extends Controller
             $q->where('user_give_id' , $id);
         })->get();
 
-        return responseSuccess($data , 'data returned successfully')
+        return responseSuccess($data , 'data returned successfully');
     }
 }
