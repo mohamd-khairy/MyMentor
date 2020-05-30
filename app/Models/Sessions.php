@@ -76,4 +76,9 @@ class Sessions extends Model
     {
         return $this->attributes['created_at'] ? 'Created On '.date('d M, Y' , strtotime($this->attributes['created_at'])) : null;
     }
+
+    public function getUpdatedAtAttribute()
+    {
+        return $this->attributes['updated_at'] ? date('d M, Y' , strtotime($this->attributes['updated_at'])) : null;
+    }
 }
