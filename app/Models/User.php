@@ -33,6 +33,16 @@ class User extends VUSER implements JWTSubject
 
     protected $with = ['user_type'];
 
+    protected $appends = ['count_rates'];
+
+
+    public function getCountRatesAttribute()
+    {
+        
+        return $this->rates() ? $this->rates()->count() : 0;
+    }
+
+
 
     public function setPasswordAttribute($input)
     {
@@ -65,7 +75,7 @@ class User extends VUSER implements JWTSubject
 
     public function rates()
     {
-        return $this->hasMany(Rate::class , 'user_add_rate_id');
+        return $this->hasMany(Rate::class , 'user_rated_id');
     }
 
     public function job()

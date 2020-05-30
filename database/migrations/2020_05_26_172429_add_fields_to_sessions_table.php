@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAcceptToSessionsTable extends Migration
+class AddFieldsToSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddAcceptToSessionsTable extends Migration
     public function up()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->enum('status', ['pending','accept','reject'])->default('pending');	
-
+            $table->text('title')->after('details')->nullable();
+            $table->text('day_ids')->after('day_id')->nullable();
         });
     }
 
@@ -27,7 +27,8 @@ class AddAcceptToSessionsTable extends Migration
     public function down()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->dropColumn('accept');
+            $table->dropColumn('title');
+            $table->dropColumn('day_ids');
         });
     }
 }

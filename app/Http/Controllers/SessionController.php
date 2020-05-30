@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
+use App\Models\SessionDays;
 use App\Models\Sessions;
+use App\Models\WeekDays;
 use Illuminate\Support\Facades\Validator;
 
 class SessionController extends Controller
 {
     const MODEL = Sessions::class;
-    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id'];
+    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id' , 'status' , 'session_type'];
 
     use RestApi;
 
@@ -33,8 +35,22 @@ class SessionController extends Controller
             return responseFail('user receive id must be user type');
         }
 
-        return $this->add($request);  
+        $data = $request->all();
+        
 
+        $data = Sessions::create($data);//firstOrCreate
+
+        foreach($request->dateTime as $day => $item){
+
+            SessionDays::create([
+                'session_id' => $data->id,
+                'week_days_id' => WeekDays::days[$day] ,
+                'date_time' => $item ,
+            ]);
+
+        }
+
+        return responseSuccess($data , "data added successfully");
     }
 
     public function acceptOrReject(Request $request , $session_id)
@@ -43,7 +59,7 @@ class SessionController extends Controller
         //must be mentor
         
         $validator = Validator::make($request->all(), [
-            'accept' => 'required'
+            'status' => 'required'
         ]);
         
         if ($validator->fails()) {    
@@ -52,11 +68,9 @@ class SessionController extends Controller
 
         $session = Sessions::find($session_id);
 
-        $accept = (int) $request->accept == 1 ||  (string) $request->accept == "true"? 1: 0;
-
         if($session){
 
-            $session->update(['accept' => (boolean) $accept]);
+            $session->update(['status' => $request->status]);
 
             return responseSuccess($session , 'session changed successfully');
 

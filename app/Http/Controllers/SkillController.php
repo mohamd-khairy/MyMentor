@@ -19,26 +19,49 @@ class SkillController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function store(Request $request)
+
+    public function update_skill(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            "skill_name" => "required|string"
-        ]);
-         
-        if ($validator->fails()) {    
-            return response()->json($validator->messages(), 400);
+        $row = SkillDetails::find($id);
+
+        if (empty($row)) {
+            return responseFail("data is empty");
+        }
+        $data = $request->all();
+
+        if($request->photo){
+            $file = 'images'; 
+            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path($file), $imageName);
+            $data['photo'] = $file.'/'.$imageName;
         }
 
-        $skills = explode(',' , $request->skill_name);
+        $row->update($data);
 
-        $data = Collect($skills)->map(function($item){
-            return SkillDetails::updateOrCreate(['user_id' => auth('api')->user()->id ,'skill_name' => $item]);
-        });
-
-        if($data){
-            return responseSuccess($data , 'data saved successfully');
-        }
-        return responseFail('some thing wrong');
+        return responseSuccess($row , "data updated successfully");
     }
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         "skill_name" => "required|string"
+    //     ]);
+         
+    //     if ($validator->fails()) {    
+    //         return response()->json($validator->messages(), 400);
+    //     }
+
+        // $skills = explode(',' , $request->skill_name);
+
+        // $data = Collect($skills)->map(function($item) use($request){
+        //     return SkillDetails::updateOrCreate([
+        //         'user_id' => auth('api')->user()->id ,
+        //         'skill_name' => $item,
+        //         'experience_years' => $request->experience_years,
+        //         'details' => $request->details
+        //     ]);
+        // });
+        // return $data = $this->add($request);
+
+    // }
     
 }

@@ -19,6 +19,7 @@ class CreateSessionsTable extends Migration
             $table->unsignedBigInteger('user_recieve_id')->nullable();
             $table->unsignedBigInteger('day_id')->nullable();
             $table->string('duration')->nullable();
+
             $table->text('details')->nullable();
 
             $table->foreign('day_id')->references('id')

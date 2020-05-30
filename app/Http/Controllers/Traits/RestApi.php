@@ -9,7 +9,7 @@ trait RestApi
     public function get($conditions = null)
     {
         $model = self::MODEL;
-        $data = $model::where($conditions)->get();
+        $data = $model::where($conditions)->orderBy('id' ,'desc')->get();
 
         if (empty($data)) {
             return responseFail("data is empty");
@@ -31,27 +31,47 @@ trait RestApi
     public function put($request, $id)
     {
         $model = self::MODEL;
-        $data = $model::find($id);
+        $row = $model::find($id);
 
-        if (empty($data)) {
+        if (empty($row)) {
             return responseFail("data is empty");
         }
-        $request = $request->all();
-        // $request['user_id'] = auth('api')->user()->id;
+        $data = $request->all();
 
-        $data->update($request);
+        if($request->photo){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path($file), $imageName);
+            $data['photo'] = $file.'/'.$imageName;
+        }
 
-        return responseSuccess($data , "data updated successfully");
+        $row->update($data);
+
+        return responseSuccess($row , "data updated successfully");
     }
 
     public function add($request)
     {
         $model = self::MODEL;
-        $data = $model::firstOrCreate($request->all());
-
-        if (empty($data)) {
-            return responseFail("data is empty");
+        $data = $request->all();
+        
+        if($request->photo){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            $imageName = time().'.'. $request->photo->getClientOriginalExtension();
+            $request->photo->move(public_path($file), $imageName);
+            $data['photo'] = $file.'/'.$imageName;
         }
+
+        $data = $model::create($data);//firstOrCreate
+
         return responseSuccess($data , "data added successfully");
     }
 
@@ -103,11 +123,16 @@ trait RestApi
         $all_data = $request->all();
 
         if($request->photo){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
             // Storage::delete($data->photo);
             // $all_data['photo'] = $request->photo->store('/users/profile');
             $imageName = time().'.'. $request->photo->getClientOriginalExtension();
-            $request->photo->move(public_path('images/users/profile'), $imageName);
-            $all_data['photo'] = 'images/users/profile/'.$imageName;
+            $request->photo->move(public_path($file), $imageName);
+            $all_data['photo'] = $file.'/'.$imageName;
         }
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAcceptToSessionsTable extends Migration
+class AddRepoUrlToSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,11 @@ class AddAcceptToSessionsTable extends Migration
     public function up()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->enum('status', ['pending','accept','reject'])->default('pending');	
+            $table->text('repository_url')->after('details')->nullable();
 
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
@@ -27,7 +27,8 @@ class AddAcceptToSessionsTable extends Migration
     public function down()
     {
         Schema::table('sessions', function (Blueprint $table) {
-            $table->dropColumn('accept');
+            $table->dropColumn('repository_url');
+
         });
     }
 }

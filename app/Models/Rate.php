@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Rate extends Model
 {
-    protected $fillable = ['rate' , 'comment' , 'user_add_rate_id' , 'user_id'];
+    protected $fillable = ['rate' , 'comment' , 'user_rated_id' , 'user_id'];
 
-    protected $hidden = ['created_at' , 'updated_at'];
+    protected $hidden = ['updated_at'];
 
-    protected $with = ['user' , 'user_add_rate'];
+    protected $with = ['user' , 'user_rated'];
     
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        // your other new column
+    ];
+
     /** attach loged in user id with profile data */
     public static function boot()
     {
@@ -34,11 +41,17 @@ class Rate extends Model
     
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id');
+        return $this->belongsTo(User::class , 'user_id')->with('profile');
     }
 
-    public function user_add_rate()
+    public function user_rated()
     {
-        return $this->belongsTo(User::class , 'user_add_rate_id');
+        return $this->belongsTo(User::class , 'user_rated_id')->with('profile');
+    }
+
+    public function getCreatedAtAttribute()
+    {
+        return $this->attributes['created_at'] ?  Carbon::parse($this->attributes['created_at'])->diffForHumans() : null ;
+        // date('d M Y' , strtotime($this->attributes['created_at'])) : null;
     }
 }

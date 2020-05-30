@@ -11,6 +11,7 @@ class WeekDayController extends Controller
     const MODEL = WeekDays::class;
     const FILTERS = [];
 
+
     use RestApi;
 
     public function __construct()

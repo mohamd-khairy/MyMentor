@@ -42,6 +42,7 @@ Route::group([
     Route::resource('message' , 'MessageController'); // done
     Route::resource('job' , 'JobDetailsController'); // done
 
+    Route::post('skill/{id}' , 'SkillController@update_skill'); // done
 
     Route::post('profile' , 'ProfileController@update_profile'); // done
     Route::get('mentor-profile/{id}' , 'ProfileController@show_mentor_profile'); // done

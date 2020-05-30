@@ -26,13 +26,25 @@ class ProfileController extends Controller
         $current_id = auth('api')->user()->id;
         $data = User::find($id);
 
-        if($current_id != $data->id){
+        if($current_id != $data->id && $data->user_type->user_type_name != 'mentor'){
             return responseFail("this id not belong to you !");
         }
         
 
         return $this->find($id);
 
+    }
+
+    public function update(Request $request, $id)
+    {
+        $current_id = auth('api')->user()->id;
+        $data = User::find($id);
+
+        if($current_id != $data->id){
+            return responseFail("this id not belong to you !");
+        }
+
+        return $this->put($request , $id);
     }
 
     public function show_mentor_profile($id)

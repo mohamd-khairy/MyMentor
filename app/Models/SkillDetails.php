@@ -8,7 +8,7 @@ class SkillDetails extends Model
 {
     protected $table = 'skill_details';
 
-    protected $fillable = ['skill_name' , 'user_id'];
+    protected $fillable = ['skill_name' , 'user_id' , 'experience_years' , 'details' , 'photo'];
 
     protected $hidden = ['created_at' , 'updated_at'];
 
@@ -34,5 +34,20 @@ class SkillDetails extends Model
     public function user()
     {
         return $this->belongsTo(User::class , 'user_id');
+    }
+
+
+    
+    public function getPhotoAttribute()
+    {
+        $url = $_SERVER['HTTP_HOST'] == 'localhost:8000' ? 'http://localhost:8000' : config('app.host_url');
+        $file = $url.'/'.$this->attributes['photo'];
+
+        if(isset($this->attributes['photo']) && file_exists($this->attributes['photo'])){
+            return $file;
+        }else{
+          return "https://img.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg?size=338&ext=jpg";
+        }
+
     }
 }

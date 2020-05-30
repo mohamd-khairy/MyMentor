@@ -19,9 +19,26 @@ class JobDetailsController extends Controller
         $this->middleware('auth:api');
     }
     
+    public function index(Request $request)
+    {
+        $conditions = $this->filter($request);
+
+        if(is_array($conditions)){
+            $data = JobDetails::where($conditions)->first();
+            return responseSuccess($data , "data returned successfully"); 
+        }else{
+            return $this->filter($request);
+        }
+    }
+
     public function store(Request $request)
     {
-        $data = JobDetails::create($request->all());
+        $old = JobDetails::where('user_id' , auth('api')->user()->id)->first();
+        if($old){
+            $data = JobDetails::update($request->all());
+        }else{
+            $data = JobDetails::create($request->all());
+        }
 
         $this->set_complete_profile_rate();
 
