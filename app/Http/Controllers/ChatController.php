@@ -25,6 +25,7 @@ class ChatController extends Controller
 
         if(auth('api')->user()->user_type->user_type_name == 'mentor'){
 
+            $data['mentor_id'] = auth('api')->user()->id;
             /**  user_id is required_if:logged in user is mentor */
             $validator = Validator::make($request->all(), [
                 'user_id' => 'required'
@@ -32,6 +33,7 @@ class ChatController extends Controller
 
         }else{
 
+            $data['user_id'] = auth('api')->user()->id;
             /**  mentor_id is required_if:logged in user is user */
             $validator = Validator::make($request->all(), [
                 'mentor_id' => 'required'
@@ -42,7 +44,8 @@ class ChatController extends Controller
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 400);
         }
-        $data = Chat::firstOrNew($data);
+
+        $data = Chat::firstOrCreate($data);
 
         return responseSuccess($data , "data added successfully");
 
