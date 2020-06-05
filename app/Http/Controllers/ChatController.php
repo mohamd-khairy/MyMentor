@@ -21,6 +21,8 @@ class ChatController extends Controller
 
     public function store(Request $request)
     {
+        $data = $request->all();
+
         if(auth('api')->user()->user_type->user_type_name == 'mentor'){
 
             /**  user_id is required_if:logged in user is mentor */
@@ -40,8 +42,8 @@ class ChatController extends Controller
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 400);
         }
-        
-        $data = Chat::firstOrCreate($request->all());
+        return $data;
+        $data = Chat::firstOrCreate($data);
 
         return responseSuccess($data , "data added successfully");
 
