@@ -34,6 +34,7 @@ class JobDetailsController extends Controller
     public function store(Request $request)
     {
         $old = JobDetails::where('user_id' , auth('api')->user()->id)->first();
+        return $request;
         if($old){
             $data = $old->update($request->all());
         }else{
