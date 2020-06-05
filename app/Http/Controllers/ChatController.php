@@ -44,10 +44,12 @@ class ChatController extends Controller
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 400);
         }
+        $row = Chat::where($data)->first();
+        if(empty($row)){
+            $row = Chat::create($data);
+        }
 
-        $data = Chat::firstOrCreate($data);
-
-        return responseSuccess($data , "data added successfully");
+        return responseSuccess($row , "data added successfully");
 
     }
 
