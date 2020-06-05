@@ -42,8 +42,7 @@ class ChatController extends Controller
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 400);
         }
-        return $data;
-        $data = Chat::firstOrCreate($data);
+        $data = Chat::firstOrNew($data);
 
         return responseSuccess($data , "data added successfully");
 
