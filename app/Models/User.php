@@ -19,7 +19,7 @@ class User extends VUSER implements JWTSubject
      * @var array
      */
     protected $fillable = [
-    'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
+        'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
     ];
 
     protected $hidden = [
@@ -33,7 +33,7 @@ class User extends VUSER implements JWTSubject
 
     protected $with = ['user_type'];
 
-    protected $appends = ['count_rates' , 'avatar'];
+    protected $appends = ['count_rates'];
 
 
     public function getCountRatesAttribute()
@@ -43,20 +43,6 @@ class User extends VUSER implements JWTSubject
     }
 
 
-    public function getAvatarAttribute()
-    {
-        $profile = Profile::where('user_id' , $this->id)->first();
-        $photo = $profile ? $profile->photo : '';
-        $url = $_SERVER['HTTP_HOST'] == 'localhost:8000' ? 'http://localhost:8000' : config('app.host_url');
-        $file = $url.'/'.$photo;
-
-        if(isset($photo) && file_exists($photo)){
-            return $file;
-        }else{
-          return "https://img.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg?size=338&ext=jpg";
-        }
-
-    }
 
     public function setPasswordAttribute($input)
     {
