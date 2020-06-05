@@ -44,7 +44,7 @@ class ChatController extends Controller
         if ($validator->fails()) {    
             return response()->json($validator->messages(), 400);
         }
-        return $row = Chat::where($data)->first();
+        return $row = Chat::where('mentor_id' , $request->mentor_id)->first();
         if(empty($row)){
             $row = Chat::create($data);
         }
