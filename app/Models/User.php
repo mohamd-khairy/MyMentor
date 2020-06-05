@@ -43,6 +43,20 @@ class User extends VUSER implements JWTSubject
     }
 
 
+    public function getAvatarAttribute()
+    {
+        $profile = Profile::where('user_id' , $this->id)->first();
+        $photo = $profile ? $profile->photo : '';
+        $url = $_SERVER['HTTP_HOST'] == 'localhost:8000' ? 'http://localhost:8000' : config('app.host_url');
+        $file = $url.'/'.$photo;
+
+        if(isset($photo) && file_exists($photo)){
+            return $file;
+        }else{
+          return "https://img.freepik.com/free-vector/businessman-profile-cartoon_18591-58479.jpg?size=338&ext=jpg";
+        }
+
+    }
 
     public function setPasswordAttribute($input)
     {
