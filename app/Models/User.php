@@ -19,7 +19,7 @@ class User extends VUSER implements JWTSubject
      * @var array
      */
     protected $fillable = [
-    'avatar','name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
+    'name', 'email', 'password', 'user_type_id' , 'is_active' , 'verified','remember_token', 'complete_profile_rate' , 'rate'
     ];
 
     protected $hidden = [
@@ -33,7 +33,7 @@ class User extends VUSER implements JWTSubject
 
     protected $with = ['user_type'];
 
-    protected $appends = ['count_rates'];
+    protected $appends = ['count_rates' , 'avatar'];
 
 
     public function getCountRatesAttribute()
