@@ -52,23 +52,23 @@ class JobDetails extends Model
         $this->attributes['available_days'] =  json_encode($input);
     }
 
-    // public function getAvailableLangsAttribute($value) {
+    public function getAvailableLangsAttribute($value) {
 
-    //     $langs = json_decode($value, true);
+        $langs = json_decode($value, true);
 
-    //     $language_names = [];
+        $language_names = [];
 
-    //     if(!empty($langs)){
+        if(!empty($langs)){
 
-    //         $collection = new Collection($langs);
+            $collection = new Collection($langs);
             
-    //         $language_names = $collection->map(function($item, $key) {
-    //             return Language::where('id' , $item)->first()->name_1;
-    //         });
-    //     }
+            $language_names = $collection->map(function($item, $key) {
+                return Language::where('id' , $item)->first()->name;
+            });
+        }
 
-    //     return $language_names;
-    // }
+        return $language_names;
+    }
 
     public function getAvailableDaysAttribute($value) {
         $days = json_decode($value, true);
