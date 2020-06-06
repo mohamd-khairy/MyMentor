@@ -35,6 +35,7 @@ class JobDetailsController extends Controller
     {
         $old = JobDetails::where('user_id' , auth('api')->user()->id)->first();
         if($old){
+            return $request->all();
             $data = $old->update($request->all());
         }else{
             $data = JobDetails::create($request->all());
