@@ -28,7 +28,7 @@ class Chat extends Model
 
     public function mentor()
     {
-        return $this->belongsTo(User::class , 'mentor_id');
+        return $this->belongsTo(User::class , 'mentor_id')->with('profile');
     }
 
     public function user()
