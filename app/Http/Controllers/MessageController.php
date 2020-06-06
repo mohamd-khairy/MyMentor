@@ -9,7 +9,7 @@ use App\Models\Message;
 class MessageController extends Controller
 {
     const MODEL = Message::class;
-    const FILTERS = [];
+    const FILTERS = ['chat_id'];
 
     use RestApi;
 
