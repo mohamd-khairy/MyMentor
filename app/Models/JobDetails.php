@@ -42,10 +42,10 @@ class JobDetails extends Model
     }
 
     
-    public function setAvailableLangsAttribute($input)
-    {
-        $this->attributes['available_langs'] = json_encode($input);
-    }
+    // public function setAvailableLangsAttribute($input)
+    // {
+    //     $this->attributes['available_langs'] = json_encode($input);
+    // }
 
     public function setAvailableDaysAttribute($input)
     {
