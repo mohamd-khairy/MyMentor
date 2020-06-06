@@ -8,7 +8,7 @@ class Message extends Model
 {
     protected $fillable = ['message' , 'user_id' ,'chat_id'];
 
-    protected $with = ['user' , 'chat'];
+    protected $with = ['user'];
 
     /** attach loged in user id with profile data */
     public static function boot()
