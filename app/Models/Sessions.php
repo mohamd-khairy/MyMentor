@@ -9,9 +9,7 @@ use Illuminate\Support\Collection;
 class Sessions extends Model
 {
     protected $fillable = ['title' , 'day_ids' , 'details' , 'duration' , 'day_id' , 'repository_url' ,
-     'user_give_id' , 'user_recieve_id' ,'topic_id','status','session_type'];
-
-    protected $hidden = ['updated_at'];
+     'user_give_id' , 'user_recieve_id' ,'topic_id','status', 'codeReview_status' ,'session_type'];
 
     protected $with = ['user_give' , 'user_recieve' , 'topic' ,'sessionDays'];
 
@@ -76,6 +74,11 @@ class Sessions extends Model
 
     public function getCreatedAtAttribute()
     {
-        return $this->attributes['created_at'] ? 'Created On '.date('d M, Y' , strtotime($this->attributes['created_at'])) : null;
+        return $this->attributes['created_at'] ? 'Created On '.date('d M, Y - h:i A' , strtotime($this->attributes['created_at'])) : null;
+    }
+
+    public function getUpdatedAtAttribute()
+    {
+        return $this->attributes['updated_at'] ? date('d M, Y - h:i A' , strtotime($this->attributes['updated_at'])) : null;
     }
 }

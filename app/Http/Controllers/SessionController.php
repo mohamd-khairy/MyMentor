@@ -7,12 +7,13 @@ use App\Http\Controllers\Traits\RestApi;
 use App\Models\SessionDays;
 use App\Models\Sessions;
 use App\Models\WeekDays;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class SessionController extends Controller
 {
     const MODEL = Sessions::class;
-    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id' , 'status' , 'session_type'];
+    const FILTERS = ['user_give_id' ,'user_recieve_id','topic_id','day_id' , 'status' , 'session_type' , 'codeReview_status'];
 
     use RestApi;
 
@@ -21,6 +22,29 @@ class SessionController extends Controller
         $this->middleware('auth:api');
     }
     
+    public function index(Request $request)
+    {
+        $conditions = $this->filter($request);
+        if(is_array($conditions)){
+            $data = Sessions::where($conditions)->where('session_type' , '!=' , 'code review')->orderBy('id' ,'desc')->get();
+
+            return responseSuccess($data , "data returned successfully");
+        }else
+            return $this->filter($request);
+    }
+
+    public function get_codeReview_session(Request $request)
+    {
+        $conditions = $this->filter($request);
+        if(is_array($conditions)){
+            $data = Sessions::where($conditions)->where('session_type' , 'code review')->orderBy('id' ,'desc')->get();
+
+            return responseSuccess($data , "data returned successfully");
+        }else
+            return $this->filter($request);
+    }
+
+
     public function store(Request $request)
     {
         /** check type of give user type */
@@ -36,7 +60,10 @@ class SessionController extends Controller
         }
 
         $data = $request->all();
-        
+
+        if($request->session_type == 'code review'){
+            $data['codeReview_status'] = 'pending';
+        }
 
         $data = Sessions::create($data);//firstOrCreate
 
@@ -70,7 +97,28 @@ class SessionController extends Controller
 
         if($session){
 
-            $session->update(['status' => $request->status]);
+            if($session->session_type == 'code review'){
+                $status = $request->status;
+                if($request->status == 'accept'){
+                    $codeReview_status = 'inProgress';
+                }else if($request->status == 'reject'){
+                    $codeReview_status = 'canceled'; 
+                }else if($request->status == 'completed'){
+                    $codeReview_status = 'completed'; 
+                    $status = 'accept';
+                }else if($request->status == 'inProgress'){
+                    $codeReview_status = 'inProgress'; 
+                    $status = 'accept';
+                }else{
+                    $codeReview_status = 'null'; 
+                }
+                
+                $session->update(['status' => $status , 'codeReview_status' => $codeReview_status]);
+
+            }else{
+                $session->update(['status' => $request->status]);
+
+            }
 
             return responseSuccess($session , 'session changed successfully');
 
@@ -78,4 +126,51 @@ class SessionController extends Controller
             return responseFail('this session not found');
 
     }
+
+    public function schedule_sessions(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:upcoming,past'
+        ]);
+        
+        if ($validator->fails()) {    
+            return response()->json($validator->messages(), 400);
+        }
+
+
+        $id = auth('api')->user()->id;
+        $type = auth('api')->user()->user_type->user_type_name;
+        $colum = $type == 'mentor'? 'user_give_id' : 'user_recieve_id';
+        $sign = $request->status == 'upcoming' ? '>=' : '<';
+
+        $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id , $colum , $sign){
+            $q->where($colum , $id)->where('session_type' , '!=' , 'code review')->where('status' , '!=' , 'pending');
+        })->whereDate('date_time' , $sign , Carbon::now())->get();
+
+        return responseSuccess($data , 'data returned successfully');
+    }
+
+
+    // public function schedule_codereview_sessions(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'status' => 'required|in:upcoming,past'
+    //     ]);
+        
+    //     if ($validator->fails()) {    
+    //         return response()->json($validator->messages(), 400);
+    //     }
+
+
+    //     $id = auth('api')->user()->id;
+    //     $type = auth('api')->user()->user_type->user_type_name;
+    //     $colum = $type == 'mentor'? 'user_give_id' : 'user_recieve_id';
+    //     $sign = $request->status == 'upcoming' ? '>=' : '<';
+
+    //     $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id , $colum , $sign){
+    //         $q->where($colum , $id)->where('session_type' , '!=' , 'code review');
+    //     })->whereDate('date_time' , $sign , Carbon::now())->get();
+
+    //     return responseSuccess($data , 'data returned successfully');
+    // }
 }

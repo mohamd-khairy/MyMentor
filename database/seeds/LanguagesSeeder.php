@@ -18,292 +18,220 @@ class LanguagesSeeder extends Seeder
          */
         $languages = array(
             array(
-                "name" => "Afrikans",
-                "name_1" => "Afrikanns",
+                "name" => "Afrikanns",
                 "code" => "AF"),
             array(
-                "name" => "Albanés",
-                "name_1" => "Albanian",
+                "name" => "Albanian",
                 "code" => "SQ"),
             array(
-                "name" => "Árabe",
-                "name_1" => "Arabic",
+                "name" => "Arabic",
                 "code" => "AR"),
             array(
-                "name" => "Armenio",
-                "name_1" => "Armenian",
+                "name" => "Armenian",
                 "code" => "HY"),
             array(
-                "name" => "Vasco",
-                "name_1" => "Basque",
+                "name" => "Basque",
                 "code" => "EU"),
             array(
-                "name" => "Bengalí",
-                "name_1" => "Bengali",
+                "name" => "Bengali",
                 "code" => "BN"),
             array(
-                "name" => "Búlgaro",
-                "name_1" => "Bulgarian",
+                "name" => "Bulgarian",
                 "code" => "BG"),
             array(
-                "name" => "Catalán",
-                "name_1" => "Catalan",
+                "name" => "Catalan",
                 "code" => "CA"),
             array(
-                "name" => "Camboyano",
-                "name_1" => "Cambodian",
+                "name" => "Cambodian",
                 "code" => "KM"),
             array(
-                "name" => "Chino (Mandarín)",
-                "name_1" => "Chinese (Mandarin)",
+                "name" => "Chinese (Mandarin)",
                 "code" => "ZH"),
             array(
-                "name" => "Croata",
-                "name_1" => "Croation",
+                "name" => "Croation",
                 "code" => "HR"),
             array(
-                "name" => "Checo",
-                "name_1" => "Czech",
+                "name" => "Czech",
                 "code" => "CS"),
             array(
-                "name" => "Danés",
-                "name_1" => "Danish",
+                "name" => "Danish",
                 "code" => "DA"),
             array(
-                "name" => "Holandés",
-                "name_1" => "Dutch",
+                "name" => "Dutch",
                 "code" => "NL"),
             array(
-                "name" => "Inglés",
-                "name_1" => "English",
+                "name" => "English",
                 "code" => "EN"),
             array(
-                "name" => "Estonio",
-                "name_1" => "Estonian",
+                "name" => "Estonian",
                 "code" => "ET"),
             array(
                 "name" => "Fiji",
-                "name_1" => "Fiji",
                 "code" => "FJ"),
             array(
-                "name" => "Finlandés",
-                "name_1" => "Finnish",
+                "name" => "Finnish",
                 "code" => "FI"),
             array(
-                "name" => "Francés",
-                "name_1" => "French",
+                "name" => "French",
                 "code" => "FR"),
             array(
-                "name" => "Georgiano",
-                "name_1" => "Georgian",
+                "name" => "Georgian",
                 "code" => "KA"),
             array(
-                "name" => "Alemán",
-                "name_1" => "German",
+                "name" => "German",
                 "code" => "DE"),
             array(
-                "name" => "Griego",
-                "name_1" => "Greek",
+                "name" => "Greek",
                 "code" => "EL"),
             array(
                 "name" => "Gujarati",
-                "name_1" => "Gujarati",
                 "code" => "GU"),
             array(
-                "name" => "Hebreo",
-                "name_1" => "Hebrew",
+                "name" => "Hebrew",
                 "code" => "HE"),
             array(
                 "name" => "Hindi",
-                "name_1" => "Hindi",
                 "code" => "HI"),
             array(
-                "name" => "Húngaro",
-                "name_1" => "Hungarian",
+                "name" => "Hungarian",
                 "code" => "HU"),
             array(
-                "name" => "Islandés",
-                "name_1" => "Icelandic",
+                "name" => "Icelandic",
                 "code" => "IS"),
             array(
-                "name" => "Indonesio",
-                "name_1" => "Indonesian",
+                "name" => "Indonesian",
                 "code" => "ID"),
             array(
-                "name" => "Irlandés",
-                "name_1" => "Irish",
+                "name" => "Irish",
                 "code" => "GA"),
             array(
-                "name" => "Italiano",
-                "name_1" => "Italian",
+                "name" => "Italian",
                 "code" => "IT"),
             array(
-                "name" => "Japonés",
-                "name_1" => "Japanese",
+                "name" => "Japanese",
                 "code" => "JA"),
             array(
-                "name" => "Javanés",
-                "name_1" => "Javanese",
+                "name" => "Javanese",
                 "code" => "JW"),
             array(
-                "name" => "Coreano",
-                "name_1" => "Korean",
+                "name" => "Korean",
                 "code" => "KO"),
             array(
-                "name" => "Latino",
-                "name_1" => "Latin",
+                "name" => "Latin",
                 "code" => "LA"),
             array(
-                "name" => "Letón",
-                "name_1" => "Latvian",
+                "name" => "Latvian",
                 "code" => "LV"),
             array(
-                "name" => "Lituano",
-                "name_1" => "Lithuanian",
+                "name" => "Lithuanian",
                 "code" => "LT"),
             array(
-                "name" => "Macedonio",
-                "name_1" => "Macedonian",
+                "name" => "Macedonian",
                 "code" => "MK"),
             array(
-                "name" => "Malayo",
-                "name_1" => "Malay",
+                "name" => "Malay",
                 "code" => "MS"),
             array(
                 "name" => "Malayalam",
-                "name_1" => "Malayalam",
                 "code" => "ML"),
             array(
-                "name" => "Maltés",
-                "name_1" => "Maltese",
+                "name" => "Maltese",
                 "code" => "MT"),
             array(
-                "name" => "Maorí",
-                "name_1" => "Maori",
+                "name" => "Maori",
                 "code" => "MI"),
             array(
                 "name" => "Marathi",
-                "name_1" => "Marathi",
                 "code" => "MR"),
             array(
-                "name" => "Mongol",
-                "name_1" => "Mongolian",
+                "name" => "Mongolian",
                 "code" => "MN"),
             array(
-                "name" => "Nepalí",
-                "name_1" => "Nepali",
+                "name" => "Nepali",
                 "code" => "NE"),
             array(
-                "name" => "Noruego",
-                "name_1" => "Norwegian",
+                "name" => "Norwegian",
                 "code" => "NO"),
             array(
-                "name" => "Persa",
-                "name_1" => "Persian",
+                "name" => "Persian",
                 "code" => "FA"),
             array(
-                "name" => "Polaco",
-                "name_1" => "Polish",
+                "name" => "Polish",
                 "code" => "PL"),
             array(
-                "name" => "Portugués",
-                "name_1" => "Portuguese",
+                "name" => "Portuguese",
                 "code" => "PT"),
             array(
                 "name" => "Punjabi",
-                "name_1" => "Punjabi",
                 "code" => "PA"),
             array(
                 "name" => "Quechua",
-                "name_1" => "Quechua",
                 "code" => "QU"),
             array(
-                "name" => "Romanian",
-                "name_1" => "Rumano",
+                "name" => "Rumano",
                 "code" => "RO"),
             array(
-                "name" => "Ruso",
-                "name_1" => "Russian",
+                "name" => "Russian",
                 "code" => "RU"),
             array(
-                "name" => "Samoano",
-                "name_1" => "Samoan",
+                "name" => "Samoan",
                 "code" => "SM"),
             array(
-                "name" => "Serbio",
-                "name_1" => "Serbian",
+                "name" => "Serbian",
                 "code" => "SR"),
             array(
-                "name" => "Eslovaco",
-                "name_1" => "Slovak",
+                "name" => "Slovak",
                 "code" => "SK"),
             array(
-                "name" => "Esloveno",
-                "name_1" => "Slovenian",
+                "name" => "Slovenian",
                 "code" => "SL"),
             array(
-                "name" => "Español",
-                "name_1" => "Spanish",
+                "name" => "Spanish",
                 "code" => "ES"),
             array(
                 "name" => "Swahili",
-                "name_1" => "Swahili",
                 "code" => "SW"),
             array(
-                "name" => "Sueco ",
-                "name_1" => "Swedish ",
+                "name" => "Swedish ",
                 "code" => "SV"),
             array(
                 "name" => "Tamil",
-                "name_1" => "Tamil",
                 "code" => "TA"),
             array(
-                "name" => "Tártaro",
-                "name_1" => "Tatar",
+                "name" => "Tatar",
                 "code" => "TT"),
             array(
                 "name" => "Telugu",
-                "name_1" => "Telugu",
                 "code" => "TE"),
             array(
-                "name" => "Tailandés",
-                "name_1" => "Thai",
+                "name" => "Thai",
                 "code" => "TH"),
             array(
-                "name" => "Tibetano",
-                "name_1" => "Tibetan",
+                "name" => "Tibetan",
                 "code" => "BO"),
             array(
                 "name" => "Tonga",
-                "name_1" => "Tonga",
                 "code" => "TO"),
             array(
-                "name" => "Turco",
-                "name_1" => "Turkish",
+                "name" => "Turkish",
                 "code" => "TR"),
             array(
-                "name" => "Ucraniano",
-                "name_1" => "Ukranian",
+                "name" => "Ukranian",
                 "code" => "UK"),
             array(
                 "name" => "Urdu",
-                "name_1" => "Urdu",
                 "code" => "UR"),
             array(
                 "name" => "Uzbek",
-                "name_1" => "Uzbek",
                 "code" => "UZ"),
             array(
-                "name" => "Vietnamita",
-                "name_1" => "Vietnamese",
+                "name" => "Vietnamese",
                 "code" => "VI"),
             array(
-                "name" => "Galés",
-                "name_1" => "Welsh",
+                "name" => "Welsh",
                 "code" => "CY"),
             array(
                 "name" => "Xhosa",
-                "name_1" => "Xhosa",
                 "code" => "XH"),
 
         );
