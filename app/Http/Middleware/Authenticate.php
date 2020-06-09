@@ -15,21 +15,20 @@ class Authenticate //extends Middleware
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (! $request->expectsJson()) {
-            if(strpos($request->url(),"api") > 0){
-                if(empty($request->header('Authorization'))){
+        if (!$request->expectsJson()) {
+            if (strpos($request->url(), "api") > 0) {
+                if (empty($request->header('Authorization'))) {
                     return responseUnAuthorize();
-                }else{
-                    if(auth('api')->user()){
+                } else {
+                    if (auth('api')->user()) {
                         return $next($request);
-                    }else{
+                    } else {
                         return responseUnAuthenticated();
                     }
                 }
-            }else{
+            } else {
                 return route('login');
             }
-
         }
     }
 
