@@ -16,6 +16,7 @@ use App\Mail\ResetPassword;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Traits\UserTrait;
+use App\Models\Provider;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register','verify' ,'forgetPassword' ,'resetPassword']]);
+        $this->middleware('auth:api', ['except' => ['social_login', 'login', 'register', 'verify', 'forgetPassword', 'resetPassword']]);
     }
 
     /**
@@ -43,7 +44,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (! $token = Auth::guard('api')->attempt($credentials)) {
+        if (!$token = Auth::guard('api')->attempt($credentials)) {
             return responseUnAuthorize();
         }
 
@@ -56,6 +57,58 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    public function social_login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'provider_id' => 'required|max:100',
+            'provider' => 'required|string|max:100',
+            'email' => 'required|email',
+            'name' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $inputs = $request->only('provider', 'provider_id', 'name', 'email');
+        $provider = Provider::where('provider_id', (int) $request->provider_id)->first();
+
+        if (empty($provider)) {
+            $user = User::where('email', $request->email)->first();
+            if (empty($user)) {
+
+                $userData['email'] = $request->email;
+                $userData['name'] = $request->name;
+                $userData['password'] = bcrypt(Str::random(8));
+                $userData['verified'] = 1;
+                $userData['user_type_id'] = 3;
+
+                $user = User::create($userData);
+                $profile['user_id'] = $user->id;
+                $profile['first_name'] = $user->name;
+                /** create profile for this user */
+                $profile = Profile::create($profile);
+            } else {
+                $inputs['user_id'] = $user->id;
+
+                $provider = Provider::create($inputs);
+            }
+        } else {
+            $user = User::find($provider->user_id);
+        }
+
+        if (!$token = auth('api')->login($user)) {
+            return responseUnAuthorize();
+        }
+
+        /** update user data to be active */
+        auth('api')->user()->update(['is_active' => 1]);
+
+        $this->set_complete_profile_rate();
+        $this->set_rate(auth('api')->user()->id);
+
+        return $this->respondWithToken($token);
+    }
     /**
      * Get a JWT token via given credentials.
      *
@@ -85,11 +138,11 @@ class AuthController extends Controller
             /** send verify email to new user */
             Mail::to($user->email)->send(new EmailVerify($user));
 
-             /** commit database action */
-             DB::commit();
+            /** commit database action */
+            DB::commit();
 
             /** return json response with user data */
-            return responseSuccess($user , 'Your Account Created successfully , and verified email has been sent.');
+            return responseSuccess($user, 'Your Account Created successfully , and verified email has been sent.');
         }
         /** rollback the database action */
         DB::rollback();
@@ -97,7 +150,7 @@ class AuthController extends Controller
         return responseUnAuthorize();
     }
 
-     /**
+    /**
      * Verify Email.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -108,19 +161,19 @@ class AuthController extends Controller
             'token' => 'required|string|max:100',
         ]);
 
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
         }
         $remember_token = $request->token;
-        $user = User::where('remember_token' , $remember_token)->first();
-        if($user){
-            if($user->verified){
+        $user = User::where('remember_token', $remember_token)->first();
+        if ($user) {
+            if ($user->verified) {
                 return responseFail("Your e-mail is already verified. You can now login.");
-            }else{
+            } else {
                 $user->remember_token = null;
                 $user->verified = true;
                 $user->save();
-                return responseSuccess([],'email verified successfully');
+                return responseSuccess([], 'email verified successfully');
             }
         }
 
@@ -135,8 +188,7 @@ class AuthController extends Controller
     {
         $data = auth('api')->user();
         $data['profile'] = auth('api')->user()->profile;
-        return responseSuccess($data , 'user data returned successfully');
-
+        return responseSuccess($data, 'user data returned successfully');
     }
 
     /**
@@ -151,8 +203,7 @@ class AuthController extends Controller
 
         auth('api')->logout();
 
-        return responseSuccess([] , 'Successfully logged out' );
-
+        return responseSuccess([], 'Successfully logged out');
     }
 
     /**
@@ -166,8 +217,8 @@ class AuthController extends Controller
             'email' => 'required|email|max:100',
         ]);
 
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
         }
 
         $email = strtolower($request->email);
@@ -205,7 +256,7 @@ class AuthController extends Controller
             $user->resetPasswordCodeCreationdate = Carbon::now();
             if ($user->save()) {
                 Mail::to($user->email)->send(new ResetPassword($user));
-                return \responseSuccess([],'check your email to reset your password .');
+                return \responseSuccess([], 'check your email to reset your password .');
             }
         } else {
             return \responseFail("Not Found User With this Email !");
@@ -226,8 +277,8 @@ class AuthController extends Controller
             'newPassword'   => 'required|min:8|max:100'
         ]);
 
-        if($validator->fails()){
-            return response()->json($validator->errors(),400);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
         }
 
         $user = User::where("resetPasswordCode", $request->code)->first();
@@ -241,7 +292,7 @@ class AuthController extends Controller
             $user->resetPasswordCode = null;
             $user->resetPasswordCodeCreationdate = null;
             $user->save();
-            return responseSuccess([],'password reset successfully');
+            return responseSuccess([], 'password reset successfully');
         } else {
             $user->resetPasswordCode = null;
             $user->resetPasswordCodeCreationdate = null;
@@ -272,7 +323,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
-        ],200);
+        ], 200);
     }
 
     /**

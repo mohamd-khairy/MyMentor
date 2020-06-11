@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
 
-    'middleware' => [ 'CheckToken' , 'api' ],
+    'middleware' => ['CheckToken', 'api'],
     'prefix' => 'v1'
 
 ], function () {
@@ -25,33 +25,35 @@ Route::group([
     Route::post('auth/me', 'Api\AuthController@me');
 
     /** route */
-    Route::resource('days' , 'WeekDayController'); // done
-    Route::resource('language' , 'LanguageController'); // done
-    Route::resource('category' , 'CategoryController'); // done
-    Route::resource('education' , 'EducationController'); // done
-    Route::resource('experience' , 'ExperienceController'); // done
-    Route::resource('class' , 'ClassDetailsController'); // done
-    Route::resource('payment' , 'PaymentController'); // done check table database
-    Route::resource('profile' , 'ProfileController'); // done
-    Route::resource('rate' , 'RateController'); // done
-    Route::resource('session' , 'SessionController'); // done
-    Route::resource('skill' , 'SkillController'); // done
-    Route::resource('topic' , 'TopicsController'); // done
-    Route::resource('user' , 'UserController'); // done
-    Route::resource('chat' , 'ChatController'); // done
-    Route::resource('message' , 'MessageController'); // done
-    Route::resource('job' , 'JobDetailsController'); // done
+    Route::resource('days', 'WeekDayController'); // done
+    Route::resource('language', 'LanguageController'); // done
+    Route::resource('category', 'CategoryController'); // done
+    Route::resource('education', 'EducationController'); // done
+    Route::resource('experience', 'ExperienceController'); // done
+    Route::resource('class', 'ClassDetailsController'); // done
+    Route::resource('payment', 'PaymentController'); // done check table database
+    Route::resource('profile', 'ProfileController'); // done
+    Route::resource('rate', 'RateController'); // done
+    Route::resource('session', 'SessionController'); // done
+    Route::resource('skill', 'SkillController'); // done
+    Route::resource('topic', 'TopicsController'); // done
+    Route::resource('user', 'UserController'); // done
+    Route::resource('chat', 'ChatController'); // done
+    Route::resource('message', 'MessageController'); // done
+    Route::resource('job', 'JobDetailsController'); // done
 
-    Route::post('skill/{id}' , 'SkillController@update_skill'); // done
+    Route::post('skill/{id}', 'SkillController@update_skill'); // done
 
-    Route::post('profile' , 'ProfileController@update_profile'); // done
-    Route::get('mentor-profile/{id}' , 'ProfileController@show_mentor_profile'); // done
-    
-    Route::get('search' , 'TopicsController@search'); // done
+    Route::post('profile', 'ProfileController@update_profile'); // done
+    Route::get('mentor-profile/{id}', 'ProfileController@show_mentor_profile'); // done
 
-    Route::post('accept/{session_id}' , 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor');//done
-    Route::get('schedule_session' , 'SessionController@schedule_sessions'); // done
-    Route::get('codeReview_session' , 'SessionController@get_codeReview_session'); // done
+    Route::get('search', 'TopicsController@search'); // done
+
+    // Route::get('unReadMessages' , 'MessageController@get_un_read_messages'); // done
+
+    Route::post('accept/{session_id}', 'SessionController@acceptOrReject')->middleware('PermissionFor:mentor'); //done
+    Route::get('schedule_session', 'SessionController@schedule_sessions'); // done
+    Route::get('codeReview_session', 'SessionController@get_codeReview_session'); // done
 
     Route::get('most_popular_mentor', 'UserController@most_popular_mentor'); //done
 
@@ -65,11 +67,10 @@ Route::group([
 
 ], function () {
 
+    Route::post('auth/social_login', 'AuthController@social_login');
     Route::post('auth/login', 'AuthController@login')->middleware('checkVerify');
     Route::post('auth/register', 'AuthController@register');
     Route::get('auth/verify', 'AuthController@verify');
     Route::post('auth/forget/password', 'AuthController@forgetPassword');
     Route::post('auth/reset/password', 'AuthController@resetPassword');
-
-
 });

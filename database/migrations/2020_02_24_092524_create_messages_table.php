@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('chat_id');
             $table->string('message')->index('message');
+            $table->boolean('read')->default(0)->index('read');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')
