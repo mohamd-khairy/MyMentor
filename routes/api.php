@@ -57,6 +57,7 @@ Route::group([
 
     Route::get('most_popular_mentor', 'UserController@most_popular_mentor'); //done
 
+    Route::get('zoom/create', 'CategoryController@create_meeting');
 });
 
 Route::group([
@@ -66,6 +67,7 @@ Route::group([
     'prefix' => 'v1'
 
 ], function () {
+
 
     Route::post('auth/social_login', 'AuthController@social_login');
     Route::post('auth/login', 'AuthController@login')->middleware('checkVerify');
