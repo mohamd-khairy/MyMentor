@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = ['message' , 'user_id' ,'chat_id'];
+    protected $fillable = ['message', 'user_id', 'chat_id'];
 
     protected $with = ['user'];
 
@@ -17,8 +17,33 @@ class Message extends Model
 
         try {
             static::creating(function ($data) {
-                if(empty($data->user_id) && auth('api')->user()){
+                if (empty($data->user_id) && auth('api')->user()) {
                     $data->user_id = auth('api')->user()->id;
+
+                    $chat = Chat::find($data->chat_id);
+                    if ($chat) {
+                        if ($chat->user_id == $data->user_id) {
+                            $to = $chat->mentor_id;
+                            $from = $chat->user_id;
+                            $name = $chat->user->name;
+                            $image = $chat->user->profile->photo;
+                        } else {
+                            $to = $chat->user_id;
+                            $from = $chat->mentor_id;
+                            $name = $chat->mentor->name;
+                            $image = $chat->mentor->profile->photo;
+                        }
+                    }
+
+                    $noti = [
+                        'title'   => $name . ' send message to you',
+                        'body'    => $data->message,
+                        'image'   => $image,
+                        'user_id' => $to,
+                        'from_user_id' => $from,
+                        'type'    => 'chat'
+                    ];
+                    Notification::create($noti);
                 }
             });
         } catch (\Throwable $th) {
@@ -26,16 +51,16 @@ class Message extends Model
         }
     }
 
+
     /** relations */
 
     public function user()
     {
-        return $this->belongsTo(User::class , 'user_id')->with('profile');
+        return $this->belongsTo(User::class, 'user_id')->with('profile');
     }
 
     public function chat()
     {
-        return $this->belongsTo(Chat::class , 'chat_id');
+        return $this->belongsTo(Chat::class, 'chat_id');
     }
-
 }
