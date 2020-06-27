@@ -41,6 +41,8 @@ Route::group([
     Route::resource('chat', 'ChatController'); // done
     Route::resource('message', 'MessageController'); // done
     Route::resource('job', 'JobDetailsController'); // done
+    Route::get('notification', 'NotificationController@index'); // done
+    Route::get('notification/read/{user_id}', 'NotificationController@readed'); // done
 
     Route::post('skill/{id}', 'SkillController@update_skill'); // done
 
