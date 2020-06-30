@@ -57,7 +57,6 @@ Route::group([
     Route::get('schedule_session', 'SessionController@schedule_sessions'); // done
     Route::get('codeReview_session', 'SessionController@get_codeReview_session'); // done
 
-    Route::get('most_popular_mentor', 'UserController@most_popular_mentor'); //done
 
     Route::get('zoom/create', 'CategoryController@create_meeting');
 });
@@ -70,6 +69,7 @@ Route::group([
 
 ], function () {
 
+    Route::get('most_popular_mentor', 'HomePageController@most_popular_mentor'); //done
 
     Route::post('auth/social_login', 'AuthController@social_login');
     Route::post('auth/login', 'AuthController@login')->middleware('checkVerify');
