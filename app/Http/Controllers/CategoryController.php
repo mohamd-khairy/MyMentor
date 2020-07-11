@@ -39,9 +39,13 @@ class CategoryController extends Controller
                     'content-type'  => 'application/json'
                 ],
                 'json' => [
-                    "topic" => "Let's learn",
-                    "start_time" => "2020-06-19T20:30:00",
-                    "duration" => "30",
+                    "topic" => $session_data->session->title,
+                    "start_time" => collect($session_data->session->session_days)->map(function ($item) use ($session_data) {
+                        if ($item->day === $session_data->day) {
+                            return $item->date_time;
+                        }
+                    }),
+                    "duration" => explode(' ', $session_data->sessionduration)[0],
                     "password" => "123456"
                 ],
             ]);
