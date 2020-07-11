@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\RestApi;
 use App\Models\Category;
 use App\Models\SessionDays;
 use App\Models\Sessions;
+use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use \Firebase\JWT\JWT;
@@ -28,7 +29,7 @@ class CategoryController extends Controller
 
         $id = $request->id;
 
-        return $session_data = SessionDays::with('session')->where('session_id', $id)->first();
+        $session_data = SessionDays::with('session')->where('session_id', $id)->first();
 
         $client = new Client(['base_uri' => 'https://api.zoom.us']);
 
@@ -44,7 +45,7 @@ class CategoryController extends Controller
                         if ($item->day === $session_data->day) {
                             return $item->date_time;
                         }
-                    }),
+                    }) ?? Carbon::now(),
                     "duration" => explode(' ', $session_data->sessionduration)[0],
                     "password" => "123456"
                 ],
