@@ -33,17 +33,6 @@ class CategoryController extends Controller
 
         $client = new Client(['base_uri' => 'https://api.zoom.us']);
 
-        return [
-            'data' => $session_data,
-            "topic" => $session_data->session->title,
-            "start_time" => collect($session_data->session->session_days)->map(function ($item) use ($session_data) {
-                if ($item->day == $session_data->day) {
-                    return $item->pivot->date_time;
-                }
-            }),
-            "duration" => explode(' ', $session_data->session->duration)[0],
-            "password" => "123456"
-        ];
         try {
             $response = $client->request('POST', '/v2/users/me/meetings', [
                 "headers" => [
@@ -51,13 +40,8 @@ class CategoryController extends Controller
                     'content-type'  => 'application/json'
                 ],
                 'json' => [
-                    "topic" => $session_data->session->title,
-                    "start_time" => collect($session_data->session->session_days)->map(function ($item) use ($session_data) {
-                        if ($item->day === $session_data->day) {
-                            return $item->date_time;
-                        }
-                    }) ?? Carbon::now(),
-                    "duration" => explode(' ', $session_data->sessionduration)[0],
+                    "topic" => $session_data->start_at ?? Carbon::now(),
+                    "duration" => explode(' ', $session_data->sessionduration)[0] ?? "30",
                     "password" => "123456"
                 ],
             ]);
