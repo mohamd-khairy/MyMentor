@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Models\Category;
 use App\Models\SessionDays;
+use App\Models\Sessions;
 use Exception;
 use GuzzleHttp\Client;
 use \Firebase\JWT\JWT;
@@ -26,6 +27,8 @@ class CategoryController extends Controller
     {
 
         $id = $request->id;
+
+        return $session_data = SessionDays::with('session')->where('session_id', $id)->first();
 
         $client = new Client(['base_uri' => 'https://api.zoom.us']);
 
