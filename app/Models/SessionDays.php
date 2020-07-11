@@ -10,7 +10,7 @@ class SessionDays extends Model
 {
     protected $fillable = ['date_time', 'session_id', 'week_days_id', 'join_url'];
 
-    protected $appends = ['day'];
+    protected $appends = ['day', 'start_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -23,6 +23,10 @@ class SessionDays extends Model
         return  $this->week_days_id ? WeekDays::find($this->week_days_id)->day : null;
     }
 
+    public function getStartAtAttribute()
+    {
+        return $this->attributes['date_time'];
+    }
 
     public function getDateTimeAttribute()
     {
