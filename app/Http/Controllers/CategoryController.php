@@ -33,6 +33,12 @@ class CategoryController extends Controller
 
         $client = new Client(['base_uri' => 'https://api.zoom.us']);
 
+        return collect($session_data->session->session_days)->map(function ($item) use ($session_data) {
+            // if ($item->day == $session_data->day) {
+            return $item->pivot->date_time;
+            // }
+        });
+
         return [
             'data' => $session_data,
             "topic" => $session_data->session->title,
@@ -40,7 +46,7 @@ class CategoryController extends Controller
                 if ($item->day == $session_data->day) {
                     return $item->pivot->date_time;
                 }
-            }) ?? Carbon::now(),
+            }),
             "duration" => explode(' ', $session_data->session->duration)[0],
             "password" => "123456"
         ];
