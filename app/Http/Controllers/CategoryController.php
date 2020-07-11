@@ -38,10 +38,10 @@ class CategoryController extends Controller
             "topic" => $session_data->session->title,
             "start_time" => collect($session_data->session->session_days)->map(function ($item) use ($session_data) {
                 if ($item->day == $session_data->day) {
-                    return $item->date_time;
+                    return $item->pivot->date_time;
                 }
             }) ?? Carbon::now(),
-            "duration" => explode(' ', $session_data->sessionduration)[0],
+            "duration" => explode(' ', $session_data->session->duration)[0],
             "password" => "123456"
         ];
         try {
