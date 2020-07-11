@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\RestApi;
 use App\Models\Category;
 use App\Models\SessionDays;
+use App\Models\Sessions;
+use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use \Firebase\JWT\JWT;
@@ -27,6 +29,8 @@ class CategoryController extends Controller
 
         $id = $request->id;
 
+        $session_data = SessionDays::with('session')->where('session_id', $id)->first();
+
         $client = new Client(['base_uri' => 'https://api.zoom.us']);
 
         try {
@@ -36,9 +40,9 @@ class CategoryController extends Controller
                     'content-type'  => 'application/json'
                 ],
                 'json' => [
-                    "topic" => "Let's learn",
-                    "start_time" => "2020-06-19T20:30:00",
-                    "duration" => "30",
+                    "topic" => $session_data->session->title,
+                    "start_time" => $session_data->start_at ?? Carbon::now(),
+                    "duration" => explode(' ', $session_data->sessionduration)[0] ?? "30",
                     "password" => "123456"
                 ],
             ]);
