@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
         $client = new Client(['base_uri' => 'https://api.zoom.us']);
 
-        return $session_data->session['session_days'];
+        return $session_data->session->session_days->toArray();
         return collect($session_data->session->session_days)->map(function ($item) use ($session_data) {
             // if ($item->day == $session_data->day) {
             return $item;
