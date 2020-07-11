@@ -40,7 +40,8 @@ class CategoryController extends Controller
                     'content-type'  => 'application/json'
                 ],
                 'json' => [
-                    "topic" => $session_data->start_at ?? Carbon::now(),
+                    "topic" => $session_data->session->title,
+                    "start_time" => $session_data->start_at ?? Carbon::now(),
                     "duration" => explode(' ', $session_data->sessionduration)[0] ?? "30",
                     "password" => "123456"
                 ],
