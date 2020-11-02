@@ -49,6 +49,17 @@ trait RestApi
             $data['photo'] = $file.'/'.$imageName;
         }
 
+        if($request->banner){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            $imageName = time().'.'. $request->banner->getClientOriginalExtension();
+            $request->banner->move(public_path($file), $imageName);
+            $data['banner'] = $file.'/'.$imageName;
+        }
+
         $row->update($data);
 
         return responseSuccess($row , "data updated successfully");
@@ -68,6 +79,16 @@ trait RestApi
             $imageName = time().'.'. $request->photo->getClientOriginalExtension();
             $request->photo->move(public_path($file), $imageName);
             $data['photo'] = $file.'/'.$imageName;
+        }
+        if($request->banner){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            $imageName = time().'.'. $request->banner->getClientOriginalExtension();
+            $request->banner->move(public_path($file), $imageName);
+            $data['banner'] = $file.'/'.$imageName;
         }
 
         $data = $model::create($data);//firstOrCreate
@@ -135,6 +156,18 @@ trait RestApi
             $all_data['photo'] = $file.'/'.$imageName;
         }
 
+        if($request->banner){
+            if((string) $model == 'Profile'){
+                $file = 'images/users/profile'; 
+            }else{
+                $file = 'images'; 
+            }
+            // Storage::delete($data->banner);
+            // $all_data['banner'] = $request->banner->store('/users/profile');
+            $imageName = time().'.'. $request->banner->getClientOriginalExtension();
+            $request->banner->move(public_path($file), $imageName);
+            $all_data['banner'] = $file.'/'.$imageName;
+        }
 
         $data->update($all_data);
 

@@ -41,6 +41,9 @@ Route::group([
     Route::resource('chat', 'ChatController'); // done
     Route::resource('message', 'MessageController'); // done
     Route::resource('job', 'JobDetailsController'); // done
+    Route::post('online_event/{id}', 'OnlineEventController@update'); // done
+    Route::resource('online_event', 'OnlineEventController')->except('show' , 'index' , 'update'); // done
+
     Route::get('notification', 'NotificationController@index'); // done
     Route::get('notification/read/{user_id}', 'NotificationController@readed'); // done
 
@@ -77,4 +80,15 @@ Route::group([
     Route::get('auth/verify', 'AuthController@verify');
     Route::post('auth/forget/password', 'AuthController@forgetPassword');
     Route::post('auth/reset/password', 'AuthController@resetPassword');
+});
+
+
+//public
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'v1'
+
+], function () {
+    Route::resource('online_event', 'OnlineEventController')->only('show' , 'index'); // done
 });
