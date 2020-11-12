@@ -46,7 +46,7 @@ class ProfileController extends Controller
     {
         $data = User::with('profile','topics')->find($id);
 
-        if($data->user_type->id != 1 || (string) $data->user_type->user_type_name != "mentor"){
+        if($data->user_type->user_type_name != "mentor"){
             return responseFail("this id not belong to mentor !");
         }
 
