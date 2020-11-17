@@ -11,6 +11,7 @@ class RateController extends Controller
 {
     const MODEL = Rate::class;
     const FILTERS = ['user_id' , 'user_rated_id'];
+    const WITH = [];
 
     use RestApi , UserTrait;
 

@@ -11,6 +11,7 @@ class JobDetailsController extends Controller
 {
     const MODEL = JobDetails::class;
     const FILTERS = ['user_id' ];
+    const WITH = [];
 
     use RestApi , UserTrait;
 

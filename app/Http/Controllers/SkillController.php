@@ -12,7 +12,8 @@ class SkillController extends Controller
     const MODEL = SkillDetails::class;
     const FILTERS = ['user_id','skill_name'];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

@@ -18,6 +18,7 @@ class UserController extends Controller
 {
     const MODEL = User::class;
     const FILTERS = ['user_type_id'];
+    const WITH = [];
 
     use RestApi , UserTrait;
 

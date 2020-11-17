@@ -11,7 +11,8 @@ class NotificationController extends Controller
     const MODEL = Notification::class;
     const FILTERS = ['user_id'];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

@@ -12,7 +12,8 @@ class WeekDayController extends Controller
     const FILTERS = [];
 
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

@@ -12,7 +12,7 @@ class ChatController extends Controller
 {
     const MODEL = Chat::class;
     const FILTERS = ['user_id', 'mentor_id'];
-
+    const WITH = [];
     use RestApi;
 
     public function __construct()

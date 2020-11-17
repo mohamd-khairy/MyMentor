@@ -9,15 +9,15 @@ use App\Models\ClassDetails;
 class ClassDetailsController extends Controller
 {
     const MODEL = ClassDetails::class;
-    const FILTERS = ['user_id' ];
-
+    const FILTERS = ['user_id'];
+    const WITH = [];
     use RestApi;
 
     public function __construct()
     {
         $this->middleware('auth:api');
     }
-    
+
     public function store(Request $request)
     {
         $data = ClassDetails::create($request->all());
@@ -25,6 +25,6 @@ class ClassDetailsController extends Controller
         if (empty($data)) {
             return responseFail("data is empty");
         }
-        return responseSuccess($data , "data added successfully");
+        return responseSuccess($data, "data added successfully");
     }
 }

@@ -10,6 +10,7 @@ class OnlineEventController extends Controller
 {
     const MODEL = OnlineEvent::class;
     const FILTERS = [];
+    const WITH = ['user'];
 
     use RestApi;
 }

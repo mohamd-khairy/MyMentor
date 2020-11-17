@@ -11,7 +11,8 @@ class EducationController extends Controller
     const MODEL = EducationDetails::class;
     const FILTERS = ['user_id' ];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

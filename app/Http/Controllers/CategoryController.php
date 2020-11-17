@@ -16,7 +16,7 @@ class CategoryController extends Controller
 {
     const MODEL = Category::class;
     const FILTERS = [];
-
+    const WITH = [];
     use RestApi;
 
     public function __construct()

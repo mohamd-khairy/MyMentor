@@ -11,7 +11,8 @@ class ExperienceController extends Controller
     const MODEL = ExperienceDetails::class;
     const FILTERS = ['user_id' ];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

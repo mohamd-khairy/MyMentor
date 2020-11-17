@@ -15,7 +15,8 @@ class TopicsController extends Controller
     const MODEL = Topics::class;
     const FILTERS = ['user_id' ,'language_id' ,'category_id' ];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

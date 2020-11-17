@@ -13,6 +13,7 @@ class ProfileController extends Controller
 {
     const MODEL = Profile::class;
     const FILTERS = ['user_id' ];
+    const WITH = [];
 
     use RestApi , UserTrait;
 

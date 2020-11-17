@@ -12,7 +12,8 @@ class MessageController extends Controller
     const MODEL = Message::class;
     const FILTERS = ['chat_id', 'read'];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {

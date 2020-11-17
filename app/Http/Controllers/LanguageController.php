@@ -11,7 +11,8 @@ class LanguageController extends Controller
     const MODEL = Language::class;
     const FILTERS = ['chat_id'];
 
-    use RestApi;
+        const WITH = [];
+use RestApi;
 
     public function __construct()
     {
