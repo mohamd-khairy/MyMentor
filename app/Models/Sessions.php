@@ -89,7 +89,7 @@ class Sessions extends Model
 
     public function user_give()
     {
-        return $this->belongsTo(User::class, 'user_give_id');
+        return $this->belongsTo(User::class, 'user_give_id')->with('profile');
     }
 
     public function user_recieve()
