@@ -162,6 +162,29 @@ use RestApi;
     }
 
 
+    public function all_schedule_sessions(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:upcoming,past'
+        ]);
+        
+        if ($validator->fails()) {    
+            return response()->json($validator->messages(), 400);
+        }
+
+
+        $id = auth('api')->user()->id;
+        $type = auth('api')->user()->user_type->user_type_name;
+        $colum = $type == 'mentor'? 'user_give_id' : 'user_recieve_id';
+        $sign = $request->status == 'upcoming' ? '>=' : '<';
+
+        $data = SessionDays::with('session')->whereHas('session' , function($q) use ($id , $colum , $sign){
+            $q->where($colum , $id)->where('status' , '!=' , 'pending');
+        })->whereDate('date_time' , $sign , Carbon::now())->get();
+
+        return responseSuccess($data , 'data returned successfully');
+    }
+
     // public function schedule_codereview_sessions(Request $request)
     // {
     //     $validator = Validator::make($request->all(), [

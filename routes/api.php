@@ -60,7 +60,9 @@ Route::group([
     Route::get('schedule_session', 'SessionController@schedule_sessions'); // done
     Route::get('codeReview_session', 'SessionController@get_codeReview_session'); // done
     Route::get('all_pending_session', 'SessionController@get_all_pending_requests'); // done
+    Route::get('all_schedule_sessions', 'SessionController@all_schedule_sessions'); // done
 
+    
 
     Route::get('zoom/create', 'CategoryController@create_meeting');
 });
