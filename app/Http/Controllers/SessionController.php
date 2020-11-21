@@ -45,6 +45,16 @@ use RestApi;
             return $this->filter($request);
     }
 
+    public function get_all_pending_requests(Request $request)
+    {
+        $conditions = $this->filter($request);
+        if(is_array($conditions)){
+            $data = Sessions::where($conditions)->orderBy('id' ,'desc')->get();
+
+            return responseSuccess($data , "data returned successfully");
+        }else
+            return $this->filter($request);
+    }
 
     public function store(Request $request)
     {
